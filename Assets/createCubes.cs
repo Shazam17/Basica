@@ -3,7 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using DigitalRubyShared;
 
-
+public enum cS
+{
+    idle,
+    left,
+    left2,
+    right,
+    right2,
+    retLeft,
+    retRight,
+    up,
+    down
+}
 public class createCubes : MonoBehaviour
 {
     private OneTouchRotateGestureRecognizer gest;
@@ -58,6 +69,73 @@ public class createCubes : MonoBehaviour
 
     }
 
+
+
+
+
+    public cS state = cS.idle;
+
+    cS canRotate(cS dir,ref bool flag)
+    {
+        
+        if((dir == cS.left || dir == cS.right || dir == cS.up || dir == cS.down) && state == cS.idle)
+        {
+            flag = true;
+            state = dir;
+            return dir;
+        }
+        
+
+        if(state == cS.up && dir == cS.down)
+        {
+            flag = true;
+            state = cS.idle;
+            return cS.idle;
+        }
+
+        if (state == cS.down && dir == cS.up)
+        {
+            flag = true;
+        
+            state = cS.idle; 
+            return cS.idle;
+        }
+
+        if(state == cS.left && dir == cS.right)
+        {
+            flag = true;
+
+            state = cS.idle;
+            return cS.idle;
+        }
+
+        if (state == cS.right && dir == cS.left)
+        {
+            flag = true;
+
+            state = cS.idle;
+            return cS.idle;
+        }
+
+        if(state == cS.left && dir == cS.left)
+        {
+            flag = true;
+
+            state = cS.left2;
+            return cS.left2;
+        }
+
+        if (state == cS.left2 && dir == cS.right)
+        {
+            flag = true;
+
+            state = cS.left;
+            return cS.retLeft;
+        }
+        flag = false;
+        return cS.idle;
+    }
+
     void callback(GestureRecognizer gesture,ICollection<GestureTouch> touches)
     {
         bool val;
@@ -87,6 +165,11 @@ public class createCubes : MonoBehaviour
 
         if (gesture.State == GestureRecognizerState.Executing && isOnScreen)
         {
+            inCenterObject.GetComponent<Animator>().enabled = false;
+            inCenterObject.transform.Rotate(new Vector3(0, 1, 0), -gesture.DeltaX * 0.5f);
+            inCenterObject.transform.Rotate(new Vector3(1, 0, 0), gesture.DeltaY * 0.5f);
+
+            return;
             
             bool dir = false;
             if (inCenterObject.isRotating)
@@ -101,12 +184,24 @@ public class createCubes : MonoBehaviour
             {
                 if (gesture.DeltaX < 0)
                 {
+                    bool flag = false;
+                    cS dirP = canRotate(cS.left, ref flag);
+                    if (flag)
+                    {
+                        inCenterObject.Rotate(dirP);
+
+                    }
                     //inCenterObject.RotateCube(new Vector3(0, 1, 0), 1);
                 }
                 else
                 {
+                    bool flag = false;
+                    cS dirP = canRotate(cS.right, ref flag);
+                    if (flag)
+                    {
+                        inCenterObject.Rotate(dirP);
 
-                    inCenterObject.StartRotaion(0);
+                    }
                     //inCenterObject.RotateCube(new Vector3(0, 1, 0), -1);
 
                 }
@@ -115,10 +210,14 @@ public class createCubes : MonoBehaviour
             {
                 if (gesture.DeltaY < 0 && dir)
                 {
+                    inCenterObject.RotateDown();
+
                     //inCenterObject.RotateCube(new Vector3(1, 0, 0), 1);
                 }
                 else
                 {
+                    inCenterObject.RotateUp();
+
                     //inCenterObject.RotateCube(new Vector3(1, 0, 0), -1);
 
                 }

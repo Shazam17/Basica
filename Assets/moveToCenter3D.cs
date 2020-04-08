@@ -72,6 +72,7 @@ public class moveToCenter3D : MonoBehaviour
 
     public void StopRotations()
     {
+        anim.SetBool("rotateToIdle", false);
         anim.SetBool("rotateCube", false);
         isRotating = false;
     }
@@ -82,15 +83,86 @@ public class moveToCenter3D : MonoBehaviour
         {
             isRotating = true;
             anim.SetBool("rotateCube", true);
-            Rotate(dir);
+            //Rotate(dir);
         }
       
     }
 
 
-    public void Rotate(int dir)
+
+    public void SetIdle()
     {
-        anim.SetInteger("directionOfRotation", dir);
+        //anim.Play("idleInCenter");
+
+    }
+
+    public void RotateUp()
+    {
+        anim.Play("rotateUp");
+    }
+
+    public void RotateDown()
+    {
+        anim.Play("rotateDown");
+    }
+
+    public void RotateRight()
+    {
+        anim.Play("rotateRight");
+    }
+
+    public void RotateLeft()
+    {
+        anim.Play("rotateLeft");
+    }
+
+    public void RotateLeft2()
+    {
+        anim.SetInteger("directionOfRotation", 2);
+    }
+    public void ReturnRotateLeft()
+    {
+        RotateLeft();
+        //anim.SetInteger("directionOfRotation", -2);
+    }
+
+    public void Rotate(cS dir)
+    {
+        switch (dir)
+        {
+            case cS.idle:
+            isRotating = true;
+                Debug.Log("move to idlee");
+                anim.SetBool("rotateToIdle", true);
+                SetIdle();
+                break;
+
+            case cS.right:
+                isRotating = true;
+
+                RotateRight();
+                break;
+
+            case cS.left:
+                isRotating = true;
+
+                RotateLeft();
+                break;
+            case cS.left2:
+                isRotating = true;
+
+                RotateLeft2();
+                break;
+            case cS.retLeft:
+                isRotating = true;
+
+                ReturnRotateLeft();
+                break;
+
+            default:
+                SetIdle();
+                break;
+        }
     }
 
     public void RotateCube(Vector3 axis,float val)

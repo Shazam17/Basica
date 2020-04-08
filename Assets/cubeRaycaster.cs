@@ -26,8 +26,14 @@ public class cubeRaycaster : MonoBehaviour
                 {
                     return;
                 }
+                if (mv.isMoving)
+                {
+                    return;
+                }
                 if (mv.isInCenter)
                 {
+                    GameObject.Find("gameManager").GetComponent<createCubes>().isOnScreen = false;
+                    GameObject.Find("gameManager").GetComponent<createCubes>().state = cS.idle;
                     Vector3 pos = hit.transform.position;
                     Vector3 initPlace = mv.initialPosition;
                     Vector3 dir = initPlace - pos;
@@ -36,8 +42,12 @@ public class cubeRaycaster : MonoBehaviour
                     mv.dest = initPlace;
                     mv.isMoving = true;
                     mv.isInCenter = false;
-                    mv.SetAnim(false);
                     GetComponent<createCubes>().isOnScreen = false;
+                    Animator anim = hit.collider.GetComponent<Animator>();
+                    mv.SetAnim(false);
+
+                    anim.enabled = true;
+                    //anim.SetBool("isInCenter", true);
                     
                 }
                 else if(!GetComponent<createCubes>().isOnScreen)

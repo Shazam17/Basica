@@ -6,8 +6,9 @@ using UnityEngine.EventSystems;
 
 public class paintRegion : MonoBehaviour, IPointerClickHandler
 {
+
+
     Image img;
-    public string color;
     public void Start()
     {
         img = GetComponent<Image>();
@@ -15,6 +16,7 @@ public class paintRegion : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        img.color = Color.red;
+        colorPicker picker = GameObject.Find("colorPicker").GetComponent<colorPicker>();
+        img.color = picker.selectedColor;
     }
 }

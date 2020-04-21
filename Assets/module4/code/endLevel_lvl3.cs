@@ -5,14 +5,14 @@ using UnityEngine;
 public class endLevel_lvl3 : MonoBehaviour
 {
 
-    public container_figure_lvl3[] figures;
+    public dragFigure[] figures;
    
     public void OnPressButton()
     {
         bool matched = true;
         foreach(var figure in figures)
         {
-            if (!figure.matched)
+            if (!figure.enabled)
             {
                 matched = false;
                 break;

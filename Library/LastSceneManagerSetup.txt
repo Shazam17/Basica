@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/module3/colorsLevel3.unity
+- path: Assets/templates/cubeTemplate.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

@@ -88,12 +88,12 @@ public class AnimalsStrategy : ModuleStrategy
 {
     public void LoadLevel1()
     {
-        SceneManager.LoadScene("cubeTemplate");
+        SceneManager.LoadScene("animalsLevel1");
     }
 
     public void LoadLevel2()
     {
-        SceneManager.LoadScene("lettersLevel2");
+        SceneManager.LoadScene("animalsLevel2");
     }
 
     public void LoadLevel3()

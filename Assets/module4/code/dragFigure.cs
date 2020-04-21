@@ -6,22 +6,19 @@ using UnityEngine.EventSystems;
 public class dragFigure : MonoBehaviour, IDragHandler
 {
     public string type;
+    public bool enbld = true;
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = Input.mousePosition;
+        if (enbld)
+        {
+            transform.position = eventData.position;
+        }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void OffDrag(Vector2 pos)
     {
-        
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GetComponent<RectTransform>().localPosition = pos;
+        enbld = false;
     }
 }

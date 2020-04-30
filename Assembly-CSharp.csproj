@@ -74,13 +74,17 @@
      <Compile Include="Assets\Menus\code\level_navigator_mainMenu.cs" />
      <Compile Include="Assets\Menus\code\savePositionSubMenu.cs" />
      <Compile Include="Assets\Menus\code\subLevelNavigator_menu.cs" />
+     <Compile Include="Assets\Menus\code\voiceChanger.cs" />
+     <Compile Include="Assets\createLevel_lvl1_2.cs" />
+     <Compile Include="Assets\createLevel_lvl1_3.cs" />
+     <Compile Include="Assets\createScales.cs" />
      <Compile Include="Assets\cubeGestures2.cs" />
+     <Compile Include="Assets\dragNumber.cs" />
      <Compile Include="Assets\module1\code\centerObject.cs" />
      <Compile Include="Assets\module1\code\createCubes.cs" />
      <Compile Include="Assets\module1\code\cubeRaycaster.cs" />
      <Compile Include="Assets\module1\code\cubeRotationGestures.cs" />
      <Compile Include="Assets\module1\code\dragLetter.cs" />
-     <Compile Include="Assets\module1\code\findLetterScript.cs" />
      <Compile Include="Assets\module1\code\letterBasket.cs" />
      <Compile Include="Assets\module1\code\letterController.cs" />
      <Compile Include="Assets\module1\code\moveToCenter.cs" />
@@ -90,7 +94,6 @@
      <Compile Include="Assets\module1\code\setDisabled.cs" />
      <Compile Include="Assets\module1\code\showByPress.cs" />
      <Compile Include="Assets\module2\code\ButtonEnd_lvl3.cs" />
-     <Compile Include="Assets\module2\code\LevelScript_lvl2.cs" />
      <Compile Include="Assets\module2\code\ScalableItem_lvl3.cs" />
      <Compile Include="Assets\module2\code\ScalarPart_lvl3.cs" />
      <Compile Include="Assets\module2\code\Scalers_lvl3.cs" />
@@ -109,8 +112,10 @@
      <Compile Include="Assets\module4\code\endLevel_lvl3.cs" />
      <Compile Include="Assets\module5\code\animalChild.cs" />
      <Compile Include="Assets\module5\code\animalContainer.cs" />
+     <Compile Include="Assets\playIntro.cs" />
      <Compile Include="Assets\prefabs\chooseBack.cs" />
      <Compile Include="Assets\setBackground.cs" />
+     <Compile Include="Assets\smartBackground_lvl1_2.cs" />
      <Compile Include="Assets\templates\gestureDetector.cs" />
      <None Include="Assets\FingersLite\Readme.txt" />
      <None Include="Assets\FingersLite\ChangeLog.txt" />

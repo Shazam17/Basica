@@ -765,7 +765,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400.97498, y: 219}
+  m_AnchoredPosition: {x: -400.97507, y: 219}
   m_SizeDelta: {x: 2002.6, y: 437.2}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1246225257
@@ -967,7 +967,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0411\u043B\u043E\u043A 2"
+  m_Text: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 2\n"
 --- !u!222 &1762738717
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1252,8 +1252,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 59843244}
   m_HandleRect: {fileID: 59843243}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.20022726
+  m_Value: 0.000000050835087
+  m_Size: 0.20022714
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1362,7 +1362,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0411\u043B\u043E\u043A 1"
+  m_Text: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
 --- !u!222 &2023364615
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1581,7 +1581,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0411\u043B\u043E\u043A 3"
+  m_Text: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 3\n"
 --- !u!222 &2143262642
 CanvasRenderer:
   m_ObjectHideFlags: 0

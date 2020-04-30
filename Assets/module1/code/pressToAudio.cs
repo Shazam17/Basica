@@ -1,38 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class pressToAudio : MonoBehaviour
 {
-
+    AudioSource aS;
     public char letter;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
 
     public void onPressButton()
     {
-        Debug.Log("pressed");
-        findLetterScript sh = GameObject.Find("gameManager").GetComponent<findLetterScript>();
-        char nextLetter = sh.getNextLetter();
-        if(nextLetter == letter)
+        aS = GetComponent<AudioSource>();
+        char targetLetter = GameObject.Find("gameManager").GetComponent<createLevel_lvl1_3>().targetLetter;
+        
+        if(targetLetter == letter)
         {
-
-            Debug.Log("yepp this is that letter");
-            sh.removeLetter();
-            Destroy(gameObject);
+            AudioClip cl = OpenGteets.GetGreet();
+            aS.PlayOneShot(cl);
+            StartCoroutine(ToNextLevel());
         }
         else
         {
-            Debug.Log("not true!!!");
+            AudioClip cl = OpenGteets.GetDis();
+            aS.PlayOneShot(cl);
         }
+
     }
-    // Update is called once per frame
-    void Update()
+
+
+    IEnumerator ToNextLevel()
     {
-        
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("lettersLevel3");
+
     }
+
 }

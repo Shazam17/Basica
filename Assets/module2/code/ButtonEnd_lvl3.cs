@@ -7,31 +7,23 @@ public class ButtonEnd_lvl3 : MonoBehaviour
 {
 
     public Scalers_lvl3 scalers;
+    private AudioSource audioSource;
 
-    private AudioSource aS;
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void End()
-    {
-        aS = GetComponent<AudioSource>();
+    {        
         if (scalers.scale())
         {
-            var clip = OpenGteets.GetGreet();
-            aS.PlayOneShot(clip);
-            StartCoroutine(ToNextLevel());
+            StartCoroutine(Hooks.GetInstance().ToNewLevel("numbersLevel3", audioSource));
         }
         else
         {
-            var clip = OpenGteets.GetDis();
-            aS.PlayOneShot(clip);
-
+            Hooks.GetInstance().PlayDis(audioSource);
         }
     }
-
-
-    IEnumerator ToNextLevel()
-    {
-        yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene("numbersLevel3");
-
-    }
+    
 }

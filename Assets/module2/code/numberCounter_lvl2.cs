@@ -13,15 +13,15 @@ public class numberCounter_lvl2 : MonoBehaviour
     public RectTransform startSpawnPoint;
     public GameObject spawningObject;
     public Transform parent;
-    public AudioSource aS;
+    public AudioSource audioSource;
 
 
     void Start()
     {
-        aS = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         int randNumber = Random.Range(1, 10);
 
-        Sprite textureTemp = Resources.Load<Sprite>("lvl2_2_basket/" + randNumber.ToString()) as Sprite;
+        Sprite textureTemp = Resources.Load<Sprite>("lvl2_2_basket/" + randNumber.ToString());
         GetComponent<Image>().sprite = textureTemp;
 
         targerCount = randNumber;
@@ -54,24 +54,16 @@ public class numberCounter_lvl2 : MonoBehaviour
         }
     }
 
-    IEnumerator ToNextLevel()
-    {
-        yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene("numbersLevel2");
-           
-    }
-
+  
     public void EndLevel()
     {
         if (counter == targerCount)
         {
-            aS.PlayOneShot(OpenGteets.GetGreet());
-            StartCoroutine(ToNextLevel());
+            StartCoroutine(Hooks.GetInstance().ToNewLevel("numbersLevel2", audioSource));
         }
         else
         {
-            aS.PlayOneShot(OpenGteets.GetDis());
-        
+            Hooks.GetInstance().PlayDis(audioSource);
         }
     }
 

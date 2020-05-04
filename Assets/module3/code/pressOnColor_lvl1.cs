@@ -7,21 +7,17 @@ using UnityEngine.EventSystems;
 public class pressOnColor_lvl1 : MonoBehaviour, IPointerClickHandler
 {
     public string color;
-    private AudioSource aS;
-
-
+    private AudioSource audioSource;
 
     void Start()
     {
-        aS = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
-
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        string path = PlayerPrefs.GetString("voicePath");
+        string path = Hooks.GetVoicePath();
         AudioClip clip = Resources.Load<AudioClip>(path + "Цвета/Уровень 1/" + color);
-        aS.PlayOneShot(clip);
-        Debug.Log(color + " clicked");
+        audioSource.PlayOneShot(clip); 
     }
 }

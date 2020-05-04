@@ -6,22 +6,32 @@ public class endLevel_lvl3 : MonoBehaviour
 {
 
     public dragFigure[] figures;
-   
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void OnPressButton()
     {
         bool matched = true;
         foreach(var figure in figures)
         {
-            if (!figure.enabled)
+            if (!figure.enbld)
             {
                 matched = false;
                 break;
             }
         }
 
-        if (matched)
+        if (!matched)
         {
-            OpenGteets.OpenGreetingScene();
+            StartCoroutine(Hooks.GetInstance().ToNewLevel("figuresLevel3", audioSource));
+        }
+        else
+        {
+            Hooks.GetInstance().PlayDis(audioSource);
         }
     }
 }

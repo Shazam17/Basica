@@ -6,11 +6,15 @@ using UnityEngine.SceneManagement;
 public class endLevel_lvl2 : MonoBehaviour
 {
     public ColorReciever_lvl2[] recievers;
+    private AudioSource audioSource;
 
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
    
     public void OnButtonPress()
     {
-        var aS = GetComponent<AudioSource>();
 
         bool flag = true;
         foreach(var elem in recievers)
@@ -23,28 +27,13 @@ public class endLevel_lvl2 : MonoBehaviour
 
         if (flag)
         {
-            if (!aS.isPlaying)
-            {
-                var clip = OpenGteets.GetGreet();
-                aS.PlayOneShot(clip);
-                StartCoroutine(ToNextLevel());
-            }
+            StartCoroutine(Hooks.GetInstance().ToNewLevel("colorsLevel2", audioSource));
         }
         else
         {
-            if (!aS.isPlaying)
-            {
-                var clip = OpenGteets.GetDis();
-                aS.PlayOneShot(clip);
-            }
+            Hooks.GetInstance().PlayDis(audioSource);
         }
     }
 
-
-    IEnumerator ToNextLevel()
-    {
-        yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene("colorsLevel2");
-
-    }
+ 
 }

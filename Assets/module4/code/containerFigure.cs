@@ -6,39 +6,33 @@ using UnityEngine.SceneManagement;
 public class containerFigure : MonoBehaviour
 {
     public string type;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
-
         dragFigure fig = other.GetComponent<dragFigure>();
-
-        var aS = GetComponent<AudioSource>();
-
         if (type == fig.type)
         {
-            if(!fig.isActive && !aS.isPlaying)
+            if(!fig.isActive && !audioSource.isPlaying)
             {
-                var clip = OpenGteets.GetGreet();
-                aS.PlayOneShot(clip);
+                Hooks.GetInstance().ToNewLevel("figuresLevel2", audioSource);
                 fig.StopAct();
-                StartCoroutine(ToNextLevel());
+        
             }
         }
         else
         {
-            if (!fig.isActive && !aS.isPlaying)
+            if (!fig.isActive && !audioSource.isPlaying)
             {
-                var clip = OpenGteets.GetDis();
-                aS.PlayOneShot(clip);
+                Hooks.GetInstance().PlayDis(audioSource);
                 fig.StopAct();
             }
         }
-    }
-
-    IEnumerator ToNextLevel()
-    {
-        yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene("figuresLevel2");
-
     }
 
 }

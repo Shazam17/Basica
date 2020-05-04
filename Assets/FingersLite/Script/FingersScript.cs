@@ -834,7 +834,7 @@ namespace DigitalRubyShared
                 return;
             }
 
-            if (AutoAddRequiredComponents)
+            if (false)
             {
                 // add ray casters
                 foreach (Camera camera in Camera.allCameras)

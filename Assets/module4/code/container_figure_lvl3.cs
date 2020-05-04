@@ -13,9 +13,4 @@ public class container_figure_lvl3 : MonoBehaviour
             fig.OffDrag(GetComponent<RectTransform>().localPosition);
         }
     }
-
-    public void OnTriggerExit2D(Collider2D other)
-    {
-        
-    }
 }

@@ -1,20 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class endLevel_lvl2 : MonoBehaviour
 {
     public ColorReciever_lvl2[] recievers;
 
-    // Start is called before the first frame update
-    void Start()
+   
+    public void OnButtonPress()
     {
-        
-    }
+        var aS = GetComponent<AudioSource>();
 
-    // Update is called once per frame
-    void Update()
-    {
         bool flag = true;
         foreach(var elem in recievers)
         {
@@ -26,8 +23,28 @@ public class endLevel_lvl2 : MonoBehaviour
 
         if (flag)
         {
-            OpenGteets.OpenGreetingScene();
-            Debug.Log("level complete");
+            if (!aS.isPlaying)
+            {
+                var clip = OpenGteets.GetGreet();
+                aS.PlayOneShot(clip);
+                StartCoroutine(ToNextLevel());
+            }
         }
+        else
+        {
+            if (!aS.isPlaying)
+            {
+                var clip = OpenGteets.GetDis();
+                aS.PlayOneShot(clip);
+            }
+        }
+    }
+
+
+    IEnumerator ToNextLevel()
+    {
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("colorsLevel2");
+
     }
 }

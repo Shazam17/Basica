@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f478c4aba147e4ab0cf8d39c753bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 
+  color: "\u043A\u043E\u0440\u0438\u0447\u043D\u0435\u0432\u044B\u0439"
 --- !u!1 &254873993
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f478c4aba147e4ab0cf8d39c753bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 
+  color: "\u0433\u043E\u043B\u0443\u0431\u043E\u0439"
 --- !u!1001 &433406692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -708,7 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f478c4aba147e4ab0cf8d39c753bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: green
+  color: "\u0437\u0435\u043B\u0435\u043D\u044B\u0439"
 --- !u!222 &503506908
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1669,7 +1669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f478c4aba147e4ab0cf8d39c753bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 
+  color: "\u043E\u0440\u0430\u043D\u0436\u0435\u0432\u044B\u0439"
 --- !u!1001 &1233177119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1922,7 +1922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f478c4aba147e4ab0cf8d39c753bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 
+  color: "\u0436\u0435\u043B\u0442\u044B\u0439"
 --- !u!1 &1238948252
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,7 +2106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f478c4aba147e4ab0cf8d39c753bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 
+  color: "\u043A\u0440\u0430\u0441\u043D\u044B\u0439"
 --- !u!1 &1250517634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,7 +2290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f478c4aba147e4ab0cf8d39c753bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 
+  color: "\u0444\u0438\u043E\u043B\u0435\u0442\u0432\u044B\u0439"
 --- !u!1 &1277105239
 GameObject:
   m_ObjectHideFlags: 0
@@ -2826,7 +2826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f478c4aba147e4ab0cf8d39c753bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: blue
+  color: "\u0441\u0438\u043D\u0438\u0439"
 --- !u!1 &1714010097
 GameObject:
   m_ObjectHideFlags: 0
@@ -3010,7 +3010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f478c4aba147e4ab0cf8d39c753bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 
+  color: "\u0447\u0435\u0440\u043D\u044B\u0439"
 --- !u!1 &1741122202
 GameObject:
   m_ObjectHideFlags: 0
@@ -3477,4 +3477,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f478c4aba147e4ab0cf8d39c753bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 
+  color: "\u0431\u0435\u043B\u044B\u0439"

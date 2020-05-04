@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/module2/numbersLevel3.unity
+- path: Assets/Menus/mainMenu.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

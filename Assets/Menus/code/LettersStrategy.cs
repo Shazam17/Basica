@@ -16,7 +16,7 @@ public class LettersStrategy: ModuleStrategy
 {
     public void LoadLevel1()
     {
-        SceneManager.LoadScene("cubeTemplate");
+        SceneManager.LoadScene("lettersLevel1");
     }
 
     public void LoadLevel2()
@@ -34,7 +34,7 @@ public class NumbersStrategy : ModuleStrategy
 {
     public void LoadLevel1()
     {
-        SceneManager.LoadScene("cubeTemplate");
+        SceneManager.LoadScene("numbersLevel1");
     }
 
     public void LoadLevel2()

@@ -24,11 +24,20 @@ public class playIntro : MonoBehaviour
                 played = true;
             }
         }
-        else
+        else if(path == "мужской/")
         {  
             if (!played)
             {
                 aS.PlayOneShot(male);
+                played = true;
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetString("voicePath", "женский/");
+            if (!played)
+            {
+                aS.PlayOneShot(female);
                 played = true;
             }
         }

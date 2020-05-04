@@ -36,7 +36,7 @@ public class ScalarPart_lvl3 : MonoBehaviour
     {
         loadedWeight -= other.GetComponent<ScalableItem_lvl3>().weight;
         Move(other.GetComponent<ScalableItem_lvl3>().weight * 15);
-        rightScale.Move(-other.GetComponent<ScalableItem_lvl3>().weight);
+        rightScale.Move(-   other.GetComponent<ScalableItem_lvl3>().weight);
 
     }
 }

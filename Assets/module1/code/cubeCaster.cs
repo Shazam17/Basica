@@ -53,20 +53,20 @@ public class cubeCaster : MonoBehaviour
 
     void callback(GestureRecognizer gesture, ICollection<GestureTouch> touches)
     {
+     
+
         if (inCenter)
         {
             foreach(var touch in touches)
             {
-                float magnitude = (new Vector2(touch.DeltaX, touch.DeltaX)).magnitude;
+                float magnitude = (new Vector2(touch.DeltaX, touch.DeltaY)).magnitude;
                 if(magnitude < 0.01f && touch.TouchPhase != TouchPhase.Moved)
                 {
                     //centerObject.GetComponent<cubeScript>().ToInitial();
                     //inCenter = false;
                 }
             }
-
-            centerObject.transform.Rotate(new Vector3(0, 1, 0), -gesture.DeltaX *0.5f );
-            centerObject.transform.Rotate(new Vector3(1, 0, 0), gesture.DeltaY * 0.5f);
+            centerObject.transform.Rotate(new Vector3(gesture.DeltaY, -gesture.DeltaX, 0), Space.World);
         }
         else
         {
@@ -84,13 +84,51 @@ public class cubeCaster : MonoBehaviour
      
     
     }
+    bool fingerOnScreen = false;
 
+    Vector3 lastPos;
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(0) || (Input.touches.Length == 1 && Input.touches[0].phase == UnityEngine.TouchPhase.Began))
+        {
+            fingerOnScreen = true;
+            lastPos = Input.mousePosition;
+            Debug.Log("finger on screen");
+        }
+        if (Input.GetMouseButtonUp(0) || (Input.touches.Length == 1 && Input.touches[0].phase == UnityEngine.TouchPhase.Ended))
+        {
+
+            float magn = (lastPos - Input.mousePosition).magnitude;
+            Debug.Log(magn);
+
+
+
+            bool flag = true;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+              
+                if (hit.collider.transform.parent.name == inCenterCube)
+                {
+                    flag = false;
+                }
+            }
+
+            if (magn < 4 && inCenter && flag)
+            {
+                centerObject.GetComponent<cubeScript>().ToInitial();
+                StartCoroutine(wait());
+
+            }
+            fingerOnScreen = false;
+            Debug.Log("finger off screen");
+        }
+
         if (inCenter)
         {
-            if (Input.GetMouseButtonDown(0) || ( Input.touches.Length == 1 &&  Input.touches[0].phase == UnityEngine.TouchPhase.Ended))
+            if (Input.GetMouseButtonDown(0) || ( Input.touches.Length == 1 &&  Input.touches[0].phase == UnityEngine.TouchPhase.Stationary))
             { // if left button pressed...
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -102,11 +140,7 @@ public class cubeCaster : MonoBehaviour
                         hit.collider.GetComponent<playAudioCube>().Play();
                     }
                 }
-                if(Input.touches.Length == 1 && Input.touches[0].deltaPosition.magnitude < 0.1f )
-                {
-                    centerObject.GetComponent<cubeScript>().ToInitial();
-                    inCenter = false;
-                }
+               
 
                 
 
@@ -115,20 +149,26 @@ public class cubeCaster : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButtonDown(0) || ( Input.touches.Length == 1 &&  Input.touches[0].phase == UnityEngine.TouchPhase.Ended))
+            if (Input.GetMouseButtonDown(0) || ( Input.touches.Length == 1 &&  Input.touches[0].phase == UnityEngine.TouchPhase.Stationary))
             { // if left button pressed...
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
-                    inCenter = true;
                     inCenterCube = hit.collider.transform.parent.name;
                     hit.collider.GetComponentInParent<cubeScript>().ToCenter();
                     centerObject = hit.collider.transform.parent.gameObject;
+                    StartCoroutine(wait());
                 }
             }
         }
 
     }
+    IEnumerator wait()
+    {
 
+        yield return new WaitForSeconds(0.5f);
+        inCenter = !inCenter;
+
+    }
 }

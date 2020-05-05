@@ -8,6 +8,8 @@ public class ScalarPart_lvl3 : MonoBehaviour
     private Rigidbody2D rb;
 
     public ScalarPart_lvl3 rightScale;
+    public Scalers_lvl3 scales;
+
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class ScalarPart_lvl3 : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        scales.PlusDelta(-other.GetComponent<ScalableItem_lvl3>().weight);
         loadedWeight += other.GetComponent<ScalableItem_lvl3>().weight;
         Move(-other.GetComponent<ScalableItem_lvl3>().weight * 15);
         rightScale.Move(other.GetComponent<ScalableItem_lvl3>().weight);
@@ -34,6 +37,7 @@ public class ScalarPart_lvl3 : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
+        scales.PlusDelta(other.GetComponent<ScalableItem_lvl3>().weight);
         loadedWeight -= other.GetComponent<ScalableItem_lvl3>().weight;
         Move(other.GetComponent<ScalableItem_lvl3>().weight * 15);
         rightScale.Move(-   other.GetComponent<ScalableItem_lvl3>().weight);

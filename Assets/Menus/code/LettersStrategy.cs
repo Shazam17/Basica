@@ -52,7 +52,7 @@ public class ColorsStrategy : ModuleStrategy
 {
     public void LoadLevel1()
     {
-        SceneManager.LoadScene("colorsLevel1");
+        SceneManager.LoadScene("colorsLevel1Cubes");
     }
 
     public void LoadLevel2()

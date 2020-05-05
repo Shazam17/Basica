@@ -14,17 +14,11 @@ public class dragNumber : MonoBehaviour, IDragHandler
         transform.position = eventData.position;
     }
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    public void LoadWithImage(int number)
     {
-        
+        Sprite spr = Resources.Load<Sprite>("цифры_картинки/Уровень 2/" + number.ToString());
+
+        GetComponent<Image>().sprite = spr;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

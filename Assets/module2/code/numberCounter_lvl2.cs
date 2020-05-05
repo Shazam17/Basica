@@ -18,11 +18,31 @@ public class numberCounter_lvl2 : MonoBehaviour
 
     void Start()
     {
+        int type = Random.Range(1, 10);
+        string path = Hooks.GetVoicePath();
+
+        AudioClip[] targetClips = Resources.LoadAll<AudioClip>(path + "Цифры/Уровень 2/" + type.ToString());
+
+
+
+
         audioSource = GetComponent<AudioSource>();
         int randNumber = Random.Range(1, 10);
 
         Sprite textureTemp = Resources.Load<Sprite>("lvl2_2_basket/" + randNumber.ToString());
         GetComponent<Image>().sprite = textureTemp;
+
+        foreach(var clip in targetClips)
+        {
+            if (clip.name.Contains(" " + randNumber.ToString() + " "))
+            {
+                audioSource.PlayOneShot(clip);
+            }
+        }
+           
+        
+
+        
 
         targerCount = randNumber;
 
@@ -41,6 +61,7 @@ public class numberCounter_lvl2 : MonoBehaviour
         {
             var go = Instantiate(spawningObject, startSpawnPoint);
             go.transform.SetParent(parent);
+            go.GetComponent<dragNumber>().LoadWithImage(type);
             startSpawnPoint.localPosition += move ;
         }
 
@@ -50,6 +71,7 @@ public class numberCounter_lvl2 : MonoBehaviour
         {
             var go = Instantiate(spawningObject, startSpawnPoint);
             go.transform.SetParent(parent);
+            go.GetComponent<dragNumber>().LoadWithImage(type);
             startSpawnPoint.localPosition += move;
         }
     }

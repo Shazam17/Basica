@@ -6,73 +6,96 @@ using UnityEngine.SceneManagement;
 
 
 
+
+
+
 public class letterBasket : MonoBehaviour
 {
     public char letter;
 
-    AudioSource aS;
+    AudioSource audioSource;
 
     public dragLetter[] letters;
-
     private string path;
+
+
+    private SaveLoad save;
 
     public static char GetRandomLetter()
     {
-        int letterIndex = Random.Range(0, 31);
+        int letterIndex = Random.Range(0, 33);
         char lettterChar = (char)(letterIndex + 1072);
-        //Debug.Log(lettterChar);
-        if(lettterChar == 'ф' || lettterChar == 'ч' || lettterChar == 'ц'  || lettterChar == 'ь' || lettterChar == 'р' || lettterChar == 'ы')
-        {
-            return GetRandomLetter();
-        }
+      
+        //return GetRandomLetter();
+        
         return lettterChar;
     }
 
-    
+    List<char> cLEts;
 
     public void Start()
     {
+        cLEts = new List<char>();
+        for(int i = 0; i < 33; i++)
+        {
+            cLEts.Add((char)(1072 + i));
+        }
+        save = new SaveLoad(levels.letters);
         var letterChar = GetRandomLetter();
         path = PlayerPrefs.GetString(playIntro.voicePath);
-        Debug.Log(path + "lvl1_2_introSounds/перетащи..на букву " + letterChar.ToString());
-        AudioClip txt = Resources.Load<AudioClip>(path + "lvl1_2_introSounds/перетащи..на букву " + letterChar.ToString()) as AudioClip;
+  
+        AudioClip txt = Resources.Load<AudioClip>(path + "Буквы/Уровень 2/перетащи..на букву " + letterChar.ToString());
         letter = letterChar;
-        aS = GetComponent<AudioSource>();
-        aS.PlayOneShot(txt);
-
-        Sprite textureTemp = Resources.Load<Sprite>("lvl1_2_baskets/" + letterChar.ToString().ToUpper()) as Sprite;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(txt);
+        cLEts.Remove(letter);
+        List<dragLetter> letts = new List<dragLetter>(letters);
+        var chsn = letts[Random.Range(0, letts.Count)];
+        letts.Remove(chsn);
+        Sprite textureTemp = Resources.Load<Sprite>("буквы_картинки/Уровень 2/корзины/" + letterChar.ToString().ToUpper());
         GetComponent<Image>().sprite = textureTemp;
-        int index = Random.Range(0, letters.Length);
+        chsn.setLetter(letter);
 
-        letters[index].setLetter(letter);
+        foreach(var l in letts)
+        {
+            char tLetter = cLEts[Random.Range(0, cLEts.Count)];
+            cLEts.Remove(tLetter);
+            l.setLetter(tLetter);
+        }
 
     }
     bool endLevel = false;
     void OnTriggerEnter2D(Collider2D other)
     {
-      if(letter == other.GetComponent<dragLetter>().letter)
+        if (!audioSource.isPlaying)
         {
-            AudioClip clip = OpenGteets.GetGreet();
-            aS = GetComponent<AudioSource>();
-            aS.PlayOneShot(clip);
-            endLevel = true;
-
-        }
-        else
-        {
-            AudioClip clip = OpenGteets.GetDis();
-            aS = GetComponent<AudioSource>();
-            if (!aS.isPlaying)
+            if (letter == other.GetComponent<dragLetter>().letter)
             {
-                aS.PlayOneShot(clip);
+                save.AddP(letter.ToString());
+                AudioClip clip = OpenGteets.GetGreet();
+                audioSource = GetComponent<AudioSource>();
+                audioSource.PlayOneShot(clip);
+                endLevel = true;
+
             }
-            other.GetComponent<dragLetter>().ReturnToInitial();
+            else
+            {
+                save.AddM(letter.ToString());
+                AudioClip clip = OpenGteets.GetDis();
+                audioSource = GetComponent<AudioSource>();
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.PlayOneShot(clip);
+                }
+                other.GetComponent<dragLetter>().GoBack();
+            }
         }
+      
     }
 
     void Update()
     {
-        if(!aS.isPlaying && endLevel)
+        if(!audioSource.isPlaying && endLevel)
         {
             SceneManager.LoadScene("lettersLevel2");
 

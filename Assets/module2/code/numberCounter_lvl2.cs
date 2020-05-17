@@ -15,6 +15,7 @@ public class numberCounter_lvl2 : MonoBehaviour
     public Transform parent;
     public AudioSource audioSource;
 
+    List<dragNumber> numbers;
 
     void Start()
     {
@@ -25,7 +26,7 @@ public class numberCounter_lvl2 : MonoBehaviour
 
 
 
-
+        numbers = new List<dragNumber>();
         audioSource = GetComponent<AudioSource>();
         int randNumber = Random.Range(1, 10);
 
@@ -46,15 +47,7 @@ public class numberCounter_lvl2 : MonoBehaviour
 
         targerCount = randNumber;
 
-        int n = randNumber;
-        if(randNumber < 10)
-        {
-            n = randNumber + 1;
-        }
-        if (randNumber < 5)
-        {
-            n = randNumber + 2;
-        }
+        int n = 10;
 
         Vector3 move = new Vector3(100, 0,0);
         for (int i = 0; i < n && i < 5; i++)
@@ -63,6 +56,7 @@ public class numberCounter_lvl2 : MonoBehaviour
             go.transform.SetParent(parent);
             go.GetComponent<dragNumber>().LoadWithImage(type);
             startSpawnPoint.localPosition += move ;
+            numbers.Add(go.GetComponent<dragNumber>());
         }
 
         startSpawnPoint.localPosition += new Vector3(0, -80, 0);
@@ -73,18 +67,27 @@ public class numberCounter_lvl2 : MonoBehaviour
             go.transform.SetParent(parent);
             go.GetComponent<dragNumber>().LoadWithImage(type);
             startSpawnPoint.localPosition += move;
+            numbers.Add(go.GetComponent<dragNumber>());
         }
     }
 
   
     public void EndLevel()
     {
+        
+        SaveLoad save = new SaveLoad(levels.numbers);
         if (counter == targerCount)
         {
+            save.AddP(targerCount.ToString());
             StartCoroutine(Hooks.GetInstance().ToNewLevel("numbersLevel2", audioSource));
         }
         else
         {
+            foreach(var n in numbers)
+            {
+                n.ToInit();
+            }
+            save.AddM(targerCount.ToString());
             Hooks.GetInstance().PlayDis(audioSource);
         }
     }

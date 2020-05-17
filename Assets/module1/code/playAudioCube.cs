@@ -6,16 +6,20 @@ public class playAudioCube : MonoBehaviour
 {
 
 
-    AudioSource aS;
+    AudioSource audioSource;
 
     public void Start()
     {
-        aS = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Play()
     {
-        aS.PlayOneShot(aS.clip);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(audioSource.clip);
+        }
+     
     }
    
 

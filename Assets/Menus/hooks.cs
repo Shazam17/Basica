@@ -45,6 +45,7 @@ public class Hooks
 
     IEnumerator ToLevelDelayed(string level)
     {
+        Debug.Log("to level");
         yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene(level);
 

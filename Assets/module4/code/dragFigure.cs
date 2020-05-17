@@ -8,10 +8,16 @@ public class dragFigure : MonoBehaviour, IDragHandler
     public string type;
     public bool enbld = true;
     public bool isActive = false;
+    private Vector2 initPlace;
+
+    void Start()
+    {
+        initPlace = GetComponent<RectTransform>().anchoredPosition;
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (enbld)
+        if (enbld && !lck)
         {
             transform.position = eventData.position;
         }
@@ -28,6 +34,19 @@ public class dragFigure : MonoBehaviour, IDragHandler
         StartCoroutine(StopActivity());
     }
 
+    public void GoBack()
+    {
+        StartCoroutine(toInitPlace());
+    }
+    bool lck = false;
+    private IEnumerator toInitPlace()
+    {
+        lck = true;
+
+        GetComponent<RectTransform>().anchoredPosition = initPlace;
+        yield return new WaitForSeconds(0.2f);
+        lck = false;
+    }
     IEnumerator StopActivity()
     {
         isActive = true;

@@ -56,6 +56,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\AudioOnPress.cs" />
+     <Compile Include="Assets\BackToStat.cs" />
+     <Compile Include="Assets\ExampleFolder\BitmapDrawing.cs" />
+     <Compile Include="Assets\ExampleFolder\Example.cs" />
      <Compile Include="Assets\FingersLite\Demo\DemoAsteroidScript.cs" />
      <Compile Include="Assets\FingersLite\Demo\DemoScript.cs" />
      <Compile Include="Assets\FingersLite\Script\FingersScript.cs" />
@@ -81,20 +84,24 @@
      <Compile Include="Assets\Menus\code\subLevelNavigator_menu.cs" />
      <Compile Include="Assets\Menus\code\voiceChanger.cs" />
      <Compile Include="Assets\Menus\hooks.cs" />
+     <Compile Include="Assets\animalBatch.cs" />
+     <Compile Include="Assets\createLevel1.cs" />
+     <Compile Include="Assets\createLevel5_2.cs" />
+     <Compile Include="Assets\generateFigures2.cs" />
+     <Compile Include="Assets\levelStatisticScript.cs" />
+     <Compile Include="Assets\listController.cs" />
      <Compile Include="Assets\module1\code\createLevel_lvl1_3.cs" />
-     <Compile Include="Assets\module1\code\createScales.cs" />
      <Compile Include="Assets\module1\code\cubeCaster.cs" />
      <Compile Include="Assets\module1\code\cubeScript.cs" />
      <Compile Include="Assets\module1\code\dragLetter.cs" />
-     <Compile Include="Assets\module1\code\dragNumber.cs" />
      <Compile Include="Assets\module1\code\letterBasket.cs" />
-     <Compile Include="Assets\module1\code\openLetter.cs" />
      <Compile Include="Assets\module1\code\playAudioCube.cs" />
      <Compile Include="Assets\module1\code\pressToAudio.cs" />
      <Compile Include="Assets\module2\code\ButtonEnd_lvl3.cs" />
      <Compile Include="Assets\module2\code\ScalableItem_lvl3.cs" />
      <Compile Include="Assets\module2\code\ScalarPart_lvl3.cs" />
      <Compile Include="Assets\module2\code\Scalers_lvl3.cs" />
+     <Compile Include="Assets\module2\code\dragNumber.cs" />
      <Compile Include="Assets\module2\code\numberCounter_lvl2.cs" />
      <Compile Include="Assets\module3\code\ColorReciever_lvl2.cs" />
      <Compile Include="Assets\module3\code\DragColor_lvl2.cs" />
@@ -108,10 +115,15 @@
      <Compile Include="Assets\module4\code\container_figure_lvl3.cs" />
      <Compile Include="Assets\module4\code\dragFigure.cs" />
      <Compile Include="Assets\module4\code\endLevel_lvl3.cs" />
+     <Compile Include="Assets\module5\code\AnimalsEnum.cs" />
      <Compile Include="Assets\module5\code\animalChild.cs" />
      <Compile Include="Assets\module5\code\animalContainer.cs" />
+     <Compile Include="Assets\paintPro.cs" />
      <Compile Include="Assets\prefabs\chooseBack.cs" />
+     <Compile Include="Assets\statisticsControl.cs" />
+     <Compile Include="Assets\stattistitcsNavigator.cs" />
      <None Include="Assets\FingersLite\Readme.txt" />
+     <None Include="Assets\ExampleFolder\Readme.txt" />
      <None Include="Assets\FingersLite\ChangeLog.txt" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/JohnPower/Documents/Basica/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

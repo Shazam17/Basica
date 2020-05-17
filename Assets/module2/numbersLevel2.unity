@@ -789,7 +789,7 @@ MonoBehaviour:
   spawningObject: {fileID: 7330797260542677528, guid: a6b6f97c7851ea84b81cd9313293e460,
     type: 3}
   parent: {fileID: 92836475}
-  aS: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!61 &1222611508
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -960,6 +960,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: sweetWithWeight
       objectReference: {fileID: 0}
+    - target: {fileID: 7330797260542677528, guid: a6b6f97c7851ea84b81cd9313293e460,
+        type: 3}
+      propertyPath: m_TagString
+      value: sweet
+      objectReference: {fileID: 0}
     - target: {fileID: 7330797260542677535, guid: a6b6f97c7851ea84b81cd9313293e460,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1065,7 +1070,8 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7330797260542677532, guid: a6b6f97c7851ea84b81cd9313293e460, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a6b6f97c7851ea84b81cd9313293e460, type: 3}
 --- !u!1001 &1432524026
 PrefabInstance:

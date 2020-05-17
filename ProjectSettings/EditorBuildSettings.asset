@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Menus/settings.unity
     guid: 406c028ecf965f14dbc4403c431c1f91
   - enabled: 1
+    path: Assets/Menus/StatDetails.unity
+    guid: 48418678139cb1f4eab9784f8e958399
+  - enabled: 1
     path: Assets/Menus/subMenuTemplate.unity
     guid: 8b1cb9e73b0c33e498b02c836164c062
   - enabled: 1

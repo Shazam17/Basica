@@ -8,37 +8,41 @@ public class dragLetter : MonoBehaviour,IDragHandler
 {
     public char letter;
     public Transform pos;
-
-    public void Start()
+    private Vector2 initPlace;
+    public void Awake()
     {
-        char randomLetter = letterBasket.GetRandomLetter();
-        Object[] txts = Resources.LoadAll("lvl1_2_images/" + randomLetter.ToString(), typeof(Sprite));
-        Debug.Log(randomLetter);
-        GetComponent<Image>().sprite = txts[Random.Range(0, txts.Length)] as Sprite;
-        letter = randomLetter;
+        initPlace = GetComponent<RectTransform>().anchoredPosition;
+        
+    
     }
 
-    public void setLetter(char letter)
-    {
-       
-        Object[] txts = Resources.LoadAll("lvl1_2_images/" + letter.ToString(),typeof(Sprite));
-        Debug.Log("setting letter " + letter);
-        Debug.Log(txts.Length);
-        GetComponent<Image>().sprite = txts[Random.Range(0,txts.Length)] as Sprite;
-        this.letter = letter;
+    public void setLetter(char l)
+    {   
+        Sprite[] txts = Resources.LoadAll<Sprite>("буквы_картинки/Уровень 2/" + l.ToString());
+        GetComponent<Image>().sprite = txts[Random.Range(0,txts.Length)] ;
+        letter = l;
     }
-
-    public void ReturnToInitial()
-    {
-        transform.position = pos.transform.position;
- 
-    }
+  
 
     public void OnDrag(PointerEventData eventData)
     {
-
+        if (!lck)
+        {
             transform.position = eventData.position;
-
+        }
     }
-     
+
+    public void GoBack()
+    {
+        StartCoroutine(toInitPlace());
+    }
+    bool lck = false;
+    private IEnumerator toInitPlace()
+    {
+        lck = true;
+
+        GetComponent<RectTransform>().anchoredPosition = initPlace;
+        yield return new WaitForSeconds(0.2f);
+        lck = false;
+    }
 }

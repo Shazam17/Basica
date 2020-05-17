@@ -10,7 +10,7 @@ public class cubeScript : MonoBehaviour
     public AudioClip[] clipsW;
     public AudioClip[] clipsM;
 
-    AudioSource aS;
+    AudioSource audioSource;
 
     public GameObject center;
     Vector3 initialPlace;
@@ -20,7 +20,7 @@ public class cubeScript : MonoBehaviour
     void Start()
     {
 
-        aS = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         for(int i = 0; i < faces.Length; i++)
         {
             faces[i].GetComponent<MeshRenderer>().material.mainTexture = sprites[i];

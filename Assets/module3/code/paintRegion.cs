@@ -10,6 +10,7 @@ public class paintRegion : MonoBehaviour, IPointerClickHandler
     public void Start()
     {
         img = GetComponent<Image>();
+        
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -17,4 +18,6 @@ public class paintRegion : MonoBehaviour, IPointerClickHandler
         colorPicker picker = GameObject.Find("colorPicker").GetComponent<colorPicker>();
         img.color = picker.selectedColor;
     }
+
+   
 }

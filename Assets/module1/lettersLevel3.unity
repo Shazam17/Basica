@@ -629,7 +629,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   letter: 65
-  aS: {fileID: 0}
 --- !u!82 &993756914
 AudioSource:
   m_ObjectHideFlags: 0
@@ -869,7 +868,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   letter: 65
-  aS: {fileID: 0}
 --- !u!82 &1075546169
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1194,7 +1192,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1555448030}
-  - component: {fileID: 1555448029}
   - component: {fileID: 1555448031}
   - component: {fileID: 1555448032}
   m_Layer: 0
@@ -1204,18 +1201,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1555448029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555448028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87833b474a6498c40a22d911a278f896, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1555448030
 Transform:
   m_ObjectHideFlags: 0
@@ -1245,6 +1230,7 @@ MonoBehaviour:
   letterPrefab: {fileID: 6337071525476989652, guid: 365b75dfa559a414c8bc377376d52b8b,
     type: 3}
   parent: {fileID: 804964365}
+  targetLetter: 0
 --- !u!82 &1555448032
 AudioSource:
   m_ObjectHideFlags: 0

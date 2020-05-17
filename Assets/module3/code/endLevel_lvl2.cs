@@ -15,24 +15,33 @@ public class endLevel_lvl2 : MonoBehaviour
    
     public void OnButtonPress()
     {
-
+        SaveLoad save = new SaveLoad(levels.colors);
         bool flag = true;
         foreach(var elem in recievers)
         {
             if (!elem.matched)
             {
                 flag = false;
+                save.AddP(elem.color);
+            }
+            else
+            {
+                save.AddM(elem.color);
             }
         }
 
         if (flag)
         {
+          
             StartCoroutine(Hooks.GetInstance().ToNewLevel("colorsLevel2", audioSource));
         }
         else
         {
+           
+
             Hooks.GetInstance().PlayDis(audioSource);
         }
+        
     }
 
  

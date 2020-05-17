@@ -35,13 +35,10 @@ public class createLevel_lvl1_3 : MonoBehaviour
 
         //chooseLetter to find
 
-
-
-        float x = Random.Range(-300, 300);
-        float y = Random.Range(-100, 100);
-
+        var vRand = Random.insideUnitCircle  * new Vector2(300,50);
+  
         GameObject letter = Instantiate(letterPrefab, parent.transform);
-        letter.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+        letter.GetComponent<RectTransform>().anchoredPosition = vRand;
         
 
         char let = letterBasket.GetRandomLetter();
@@ -64,12 +61,16 @@ public class createLevel_lvl1_3 : MonoBehaviour
         Sprite texture = Resources.Load<Sprite>("letters/" + let.ToString().ToUpper());
         letter.GetComponent<Image>().sprite = texture;
 
+
+
+        Vector2 last = new Vector2(-350, -100);
         for (int i = 0; i < 4; i++)
         {
-            float X = Random.Range(-300, 300);
-            float Y = Random.Range(-100, 100);
+          
+            vRand = last  + new Vector2(100,0) + Random.Range(0.1f,0.5f) * new Vector2(100, 0);
+            last = vRand;
             GameObject tempLet = Instantiate(letterPrefab, parent.transform);
-            tempLet.GetComponent<RectTransform>().anchoredPosition = new Vector2(X, Y);
+            tempLet.GetComponent<RectTransform>().anchoredPosition = vRand;
            
             char letterCharTemp = letterBasket.GetRandomLetter();
             while (letterCharTemp == let)
@@ -87,7 +88,11 @@ public class createLevel_lvl1_3 : MonoBehaviour
     public void PlayTaskAgain()
     {
         AudioSource aS = GetComponent<AudioSource>();
-        aS.PlayOneShot(aS.clip);
+        if (!aS.isPlaying)
+        {
+            aS.PlayOneShot(aS.clip);
+
+        }
     }
 
     // Start is called before the first frame update

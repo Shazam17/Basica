@@ -18,14 +18,15 @@ public class endLevel_lvl3 : MonoBehaviour
         bool matched = true;
         foreach(var figure in figures)
         {
-            if (!figure.enbld)
+            if (figure.enbld)
             {
                 matched = false;
-                break;
+                
+
             }
         }
 
-        if (!matched)
+        if (matched)
         {
             StartCoroutine(Hooks.GetInstance().ToNewLevel("figuresLevel3", audioSource));
         }

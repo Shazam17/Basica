@@ -5,26 +5,40 @@ using UnityEngine.SceneManagement;
 
 public class pressToAudio : MonoBehaviour
 {
-    AudioSource aS;
+    AudioSource audioSource;
     public char letter;
-
+    SaveLoad save;
 
     public void onPressButton()
     {
-        aS = GetComponent<AudioSource>();
+        save = new SaveLoad(levels.letters);
+        audioSource = GetComponent<AudioSource>();
         char targetLetter = GameObject.Find("gameManager").GetComponent<createLevel_lvl1_3>().targetLetter;
-        
-        if(targetLetter == letter)
+
+        if (!GameObject.Find("gameManager").GetComponent<AudioSource>().isPlaying)
         {
-            AudioClip cl = OpenGteets.GetGreet();
-            aS.PlayOneShot(cl);
-            StartCoroutine(ToNextLevel());
+            if (targetLetter == letter)
+            {
+                save.AddP(letter.ToString());
+                AudioClip cl = OpenGteets.GetGreet();
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.PlayOneShot(cl);
+                }
+
+                StartCoroutine(ToNextLevel());
+            }
+            else
+            {
+                save.AddM(letter.ToString());
+                AudioClip cl = OpenGteets.GetDis();
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.PlayOneShot(cl);
+                }
+            }
         }
-        else
-        {
-            AudioClip cl = OpenGteets.GetDis();
-            aS.PlayOneShot(cl);
-        }
+      
 
     }
 

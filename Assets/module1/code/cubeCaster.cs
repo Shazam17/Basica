@@ -53,9 +53,13 @@ public class cubeCaster : MonoBehaviour
 
     void callback(GestureRecognizer gesture, ICollection<GestureTouch> touches)
     {
-     
 
-        if (inCenter)
+        if (isMoving)
+        {
+            return;
+        }
+
+        if (inCenter && !isMoving)
         {
             foreach(var touch in touches)
             {
@@ -84,58 +88,103 @@ public class cubeCaster : MonoBehaviour
      
     
     }
-    bool fingerOnScreen = false;
 
-    Vector3 lastPos;
+    bool isMoving = false;
+    bool fingerOnScreen = false;
+    bool count = false;
+    Vector2 lastPos;
 
     void Update()
     {
+        if (isMoving)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0) || (Input.touches.Length == 1 && Input.touches[0].phase == UnityEngine.TouchPhase.Began))
         {
+           
             fingerOnScreen = true;
-            lastPos = Input.mousePosition;
+           
+
+            if (Input.touches.Length == 0)
+            {
+                lastPos = Input.mousePosition;
+            }
+            else
+            {
+                lastPos = Input.touches[0].position;
+            }
+            
             Debug.Log("finger on screen");
         }
-        if (Input.GetMouseButtonUp(0) || (Input.touches.Length == 1 && Input.touches[0].phase == UnityEngine.TouchPhase.Ended))
-        {
-
-            float magn = (lastPos - Input.mousePosition).magnitude;
-            Debug.Log(magn);
-
-
-
-            bool flag = true;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-              
-                if (hit.collider.transform.parent.name == inCenterCube)
-                {
-                    flag = false;
-                }
-            }
-
-            if (magn < 4 && inCenter && flag)
-            {
-                centerObject.GetComponent<cubeScript>().ToInitial();
-                StartCoroutine(wait());
-
-            }
-            fingerOnScreen = false;
-            Debug.Log("finger off screen");
-        }
+       
 
         if (inCenter)
         {
+
+            if (Input.GetMouseButtonUp(0) || (Input.touches.Length == 1 && Input.touches[0].phase == UnityEngine.TouchPhase.Ended))
+            {
+
+
+                float magn;
+                if (Input.touches.Length == 0)
+                {
+                    magn = (lastPos - new Vector2(Input.mousePosition.x, Input.mousePosition.y)).magnitude;
+                }
+                else
+                {
+                    magn = (lastPos - Input.touches[0].position).magnitude;
+                }
+                Debug.Log(magn);
+
+
+                bool flag = true;
+                Ray ray;
+                if(Input.touches.Length == 0)
+                {
+                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                }
+                else
+                {
+                    ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+                }
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+
+                    if (hit.collider.transform.parent.name == inCenterCube)
+                    {
+                        flag = false;
+                    }
+                }
+
+                if (magn < 4 && inCenter && flag)
+                {
+                    centerObject.GetComponent<cubeScript>().ToInitial();
+                    StartCoroutine(wait());
+
+                }
+                fingerOnScreen = false;
+                Debug.Log("finger off screen");
+            }
+
             if (Input.GetMouseButtonDown(0) || ( Input.touches.Length == 1 &&  Input.touches[0].phase == UnityEngine.TouchPhase.Stationary))
             { // if left button pressed...
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray;
+                if (Input.touches.Length == 0)
+                {
+                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                }
+                else
+                {
+                    ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+                }
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
                     if (hit.collider.transform.parent.name == inCenterCube)
                     {
+                        Debug.Log(hit.collider.name);
                         Debug.Log(hit.collider.transform.parent.name);
                         hit.collider.GetComponent<playAudioCube>().Play();
                     }
@@ -151,14 +200,39 @@ public class cubeCaster : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) || ( Input.touches.Length == 1 &&  Input.touches[0].phase == UnityEngine.TouchPhase.Stationary))
             { // if left button pressed...
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray;
+                if (isMoving || inCenter)
+                {
+                    return;
+                }
+                if(Input.touches.Length == 0)
+                {
+                    ray  = Camera.main.ScreenPointToRay(Input.mousePosition);
+                }
+                else
+                {
+                    ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+                }
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
-                    inCenterCube = hit.collider.transform.parent.name;
-                    hit.collider.GetComponentInParent<cubeScript>().ToCenter();
-                    centerObject = hit.collider.transform.parent.gameObject;
-                    StartCoroutine(wait());
+                    if (!count)
+                    {
+                        count = true;
+                        hit.collider.GetComponent<playAudioCube>().Play();
+                        return;
+                    }
+                    if (count)
+                    {
+                        inCenterCube = hit.collider.transform.parent.name;
+                        hit.collider.GetComponentInParent<cubeScript>().ToCenter();
+                        centerObject = hit.collider.transform.parent.gameObject;
+                        StartCoroutine(wait());
+                        count = false;
+                       
+                    }
+
+                 
                 }
             }
         }
@@ -166,8 +240,9 @@ public class cubeCaster : MonoBehaviour
     }
     IEnumerator wait()
     {
-
-        yield return new WaitForSeconds(0.5f);
+        isMoving = true;
+        yield return new WaitForSeconds(0.7f);
+        isMoving = false;
         inCenter = !inCenter;
 
     }

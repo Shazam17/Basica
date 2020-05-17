@@ -9,20 +9,24 @@ public class AudioOnPress : MonoBehaviour,IPointerClickHandler
     public string level;
     public string fileName;
 
-    private AudioSource aS;
+    private AudioSource audioSource;
 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        aS.PlayOneShot(aS.clip);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(audioSource.clip);
+
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         string path = PlayerPrefs.GetString("voicePath");
-        aS = GetComponent<AudioSource>();
-        aS.clip = Resources.Load<AudioClip>(path + module + "/" + level + "/" + fileName) as AudioClip;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = Resources.Load<AudioClip>(path + module + "/" + level + "/" + fileName) as AudioClip;
     }
 
     // Update is called once per frame

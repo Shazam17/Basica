@@ -15,12 +15,14 @@ public class containerFigure : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+        SaveLoad save = new SaveLoad(levels.figures);
         dragFigure fig = other.GetComponent<dragFigure>();
         if (type == fig.type)
         {
             if(!fig.isActive && !audioSource.isPlaying)
             {
-                Hooks.GetInstance().ToNewLevel("figuresLevel2", audioSource);
+                save.AddP(type);
+                StartCoroutine(Hooks.GetInstance().ToNewLevel("figuresLevel2", audioSource));
                 fig.StopAct();
         
             }
@@ -29,6 +31,7 @@ public class containerFigure : MonoBehaviour
         {
             if (!fig.isActive && !audioSource.isPlaying)
             {
+                save.AddM(type);
                 Hooks.GetInstance().PlayDis(audioSource);
                 fig.StopAct();
             }

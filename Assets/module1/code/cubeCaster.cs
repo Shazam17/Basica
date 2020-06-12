@@ -10,7 +10,8 @@ public enum Direction
     LEFT,
     RIGHT,
     UP,
-    DOWN
+    DOWN,
+    STATIC
 }
 
 
@@ -34,12 +35,15 @@ public class Gesture : MonoBehaviour
     }
 
     public float lastLen;
+    public bool canPress = true;
+
     public bool inputGesture(Vector2 newPos)
     {
         if (Input.GetMouseButtonDown(0))
         {
             if (!pressed)
             {
+                canPress = false;
                 pressed = true;
                 startGestureCord = newPos;
             }
@@ -49,33 +53,35 @@ public class Gesture : MonoBehaviour
 
             float len = (curPos - newPos).magnitude;
             float lenFromStart = (newPos - startGestureCord).magnitude;
-            if (lenFromStart < lastLen)
+            if(len < 0.00000001f)
             {
-                startGestureCord = newPos;
-                len = 0;
+                dir = Direction.STATIC;
+                deltaY = 0.0f;
             }
-            lastLen = lenFromStart;
-            curPos = newPos;
-            Vector2 direction = newPos - startGestureCord;
-            direction = direction.normalized;
-
-            float dotDir = Vector2.Dot(direction, left);
-
-            float dot = Vector2.Dot(direction, up);
-
-           
-            Vector2 deltaVec = newPos - startGestureCord;
-
-            if (dot > 0.99)
+            else
             {
-                dir = Direction.UP;
+                if (lenFromStart < lastLen)
+                {
+                    startGestureCord = newPos;
+                    len = 0;
+                }
+                lastLen = lenFromStart;
+                curPos = newPos;
+                Vector2 direction = newPos - startGestureCord;
+                direction = direction.normalized;
+                float dot = Vector2.Dot(direction, up);
+            
+
+                if (dot > 0.99)
+                {
+                    dir = Direction.UP;
+                }
+                if (dot < -0.99)
+                {
+                    dir = Direction.DOWN;
+                }
+                deltaY = dot * Time.deltaTime * len;
             }
-            if (dot < -0.99)
-            {
-                dir = Direction.DOWN;
-            }
-            deltaY = dot * Time.deltaTime * len;
-          
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -86,9 +92,15 @@ public class Gesture : MonoBehaviour
         return false;
     }
 
-
+    public bool getPressed()
+    {
+        return pressed;
+    }
   
-
+    public bool getCanPress()
+    {
+        return canPress;
+    }
 
 
 
@@ -200,7 +212,8 @@ public class cubeCaster : MonoBehaviour
         //FingersScript.Instance.ResetState(true);
         //FingersScript.Instance.AddGesture(gest);
 
-        gesture = new Gesture();
+        gameObject.AddComponent<Gesture>();
+        gesture = GetComponent<Gesture>();
     }
 
 
@@ -215,8 +228,11 @@ public class cubeCaster : MonoBehaviour
         STATIC,
         MOVING,
         BOUNCING,
-        STOP
+        STOP,
+        CENTER
     }
+
+    CubeParentState state;
 
     void cubeControlStateMachine()
     {
@@ -247,23 +263,44 @@ public class cubeCaster : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(gesture.dir);
         controlCubeParent();
+        processCubeCast();
     }
 
-    public IEnumerator SmoothStop()
+    public void processCubeCast()
+    {
+        
+        if (Input.GetMouseButtonDown(0) && gesture.dir == Direction.STATIC)
+        {
+            
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                hit.collider.GetComponent<playAudioCube>().Play();
+            }
+        }
+
+
+    }
+
+    public IEnumerator SmoothStop(int steps = 70)
     {
         float initial = gesture.deltaY;
-        for (float i = 0; i < 100; i++)
+        for (float i = 0; i < steps; i++)
         {
             if (gesture.pressed)
             {
                 break;
             }
             yield return new WaitForSeconds(0.005f);
-            float t = Mathf.Lerp(initial,0 , i / 100);
+            float t = Mathf.Lerp(initial,0 , i / steps);
             gesture.deltaY = t;
         }
+        gesture.dir = Direction.STATIC;
         gesture.deltaY = 0f;
+        
     }
 
     //void callback(GestureRecognizer gesture, ICollection<GestureTouch> touches)

@@ -50,15 +50,17 @@ public class Gesture : MonoBehaviour
     Vector2 curPos;
 
     Vector2 up;
-    Vector2 left;
+    Vector2 right;
     public bool pressed = false;
     public Direction dir;
     
     public float deltaY = 0.0f;
+    public float deltaX = 0.0f;
+
     public Gesture()
     {
         up = new Vector2(0, 1);
-        left = new Vector2(-1, 0);
+        right = new Vector2(1, 0);
     }
 
     public float lastLen;
@@ -98,6 +100,7 @@ public class Gesture : MonoBehaviour
                 direction = direction.normalized;
                 float dot = Vector2.Dot(direction, up);
 
+                float dotX = Vector2.Dot(direction, right);
 
                 if (dot > 0.99)
                 {
@@ -107,6 +110,10 @@ public class Gesture : MonoBehaviour
                 {
                     dir = Direction.DOWN;
                 }
+
+                deltaX = dotX * Time.deltaTime * len;
+
+
                 deltaY = dot * Time.deltaTime * len;
             }
             else
@@ -228,9 +235,10 @@ public class cubeCaster : MonoBehaviour
 
     Gesture gesture;
 
- 
+
     void controlCubeParent()
     {
+     
         Vector3 pos = cubeParent.transform.position;
         Vector2 input;
         if(Input.touches.Length == 0)
@@ -242,6 +250,16 @@ public class cubeCaster : MonoBehaviour
             input = Input.touches[0].position;
         }
         bool ret = gesture.inputGesture(input);
+
+        if (inCenter)
+        {
+            if (ret)
+            {
+                StartCoroutine(SmoothStopCenter());
+            }
+            return;
+        }
+
         if (pos.y > minY && gesture.deltaY > 0)
         { 
             return;
@@ -261,27 +279,70 @@ public class cubeCaster : MonoBehaviour
         }
     }
 
+
+
+
     void Update()
     {
         controlCubeParent();
         processCubeCast();
+        if (inCenter)
+        {
+            rotateCenterObject();
+        }
     }
 
-    class CubeCastController
+    public void rotateCenterObject()
     {
+        centerObject.transform.Rotate(new Vector3(gesture.deltaY, -gesture.deltaX, 0f), Space.World);
+    }
 
-        bool inCenter = false;
-        int clicks = 0;
+    bool inCenter = false;
+    bool count = false;
+    public GameObject centerObject;
+    string lastTouchName;
 
-
-       
-
+    public void processRay(Collider collider)
+    {
+        if (!inCenter)
+        {
+            if (!count)
+            {
+                collider.GetComponent<playAudioCube>().Play();
+                lastTouchName = collider.name;
+                count = true;
+            }
+            else
+            {
+                if(lastTouchName == collider.name)
+                {
+                    collider.transform.parent.GetComponent<cubeScript>().ToCenter();
+                    centerObject = collider.transform.parent.gameObject;
+                    centerObject.transform.rotation = Quaternion.identity;
+                    lastTouchName = "";
+                    inCenter = true;
+                    count = false;
+                }
+            }
+        }
+        else
+        {
+            
+            if (centerObject.name == collider.transform.parent.name)
+            {
+                collider.GetComponent<playAudioCube>().Play();
+            }
+        }
+        
     }
 
     public void processCubeCast()
     {
         
-        if (InputController.GetInputUp() && !gesture.pressed && gesture.dir == Direction.STATIC && gesture.deltaY == 0.0f)
+        if (InputController.GetInputUp()
+            && !gesture.pressed
+            && gesture.dir == Direction.STATIC
+            && Mathf.Abs(gesture.deltaY) < 0.000001f)
         {
             Ray ray;
             if (Input.touches.Length == 0)
@@ -296,11 +357,39 @@ public class cubeCaster : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                hit.collider.GetComponent<playAudioCube>().Play();
+                processRay(hit.collider);
             }
         }
     }
+    public IEnumerator SmoothStopCenter(int steps = 70)
+    {
+        Debug.Log("smooth stopping");
+        float initialX = gesture.deltaX;
+        float initialY = gesture.deltaY;
+        bool stopped = false;
+        for (float i = 0; i < steps; i++)
+        {
+            if (gesture.pressed)
+            {
+                stopped = true;
+                break;
+            }
+            yield return new WaitForSeconds(0.005f);
+            float tX = Mathf.Lerp(initialX, 0, i / steps);
+            float tY = Mathf.Lerp(initialY, 0, i / steps);
+            gesture.deltaY = tY;
+            gesture.deltaX = tX;
+        }
+        if (!stopped)
+        {
+            gesture.dir = Direction.STATIC;
+            gesture.pressed = false;
+            gesture.deltaY = 0f;
+            gesture.deltaX = 0f;
+        }
 
+
+    }
     public IEnumerator SmoothStop(int steps = 70)
     {
         Debug.Log("smooth stopping");

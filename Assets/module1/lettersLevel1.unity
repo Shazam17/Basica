@@ -30149,6 +30149,7 @@ MonoBehaviour:
   minY: 60
   maxY: 0
   cubeParent: {fileID: 1379341868}
+  inCenter: 0
   centerObject: {fileID: 0}
 --- !u!82 &1350400930
 AudioSource:
@@ -47290,7 +47291,7 @@ Transform:
   m_GameObject: {fileID: 2126376663}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.027, y: 0.039, z: 7.12}
-  m_LocalScale: {x: 17.94342, y: 10.049144, z: 1}
+  m_LocalScale: {x: 51.142475, y: 28.642149, z: 2.8502078}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9

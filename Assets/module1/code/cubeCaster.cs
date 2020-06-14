@@ -53,7 +53,8 @@ public class Gesture : MonoBehaviour
     Vector2 right;
     public bool pressed = false;
     public Direction dir;
-    
+
+   
     public float deltaY = 0.0f;
     public float deltaX = 0.0f;
 
@@ -111,10 +112,10 @@ public class Gesture : MonoBehaviour
                     dir = Direction.DOWN;
                 }
 
-                deltaX = dotX * Time.deltaTime * len;
+                deltaX = dotX * Time.deltaTime * 75;
 
 
-                deltaY = dot * Time.deltaTime * len;
+                deltaY = dot * Time.deltaTime * 75;
             }
             else
             {
@@ -147,7 +148,7 @@ public class cubeCaster : MonoBehaviour
         colors,
         figures
     }
-
+    cubeScript centerObjectScript;
     AudioClip clip;
     public levelType type;
     private AudioSource audioSource;
@@ -285,16 +286,24 @@ public class cubeCaster : MonoBehaviour
     void Update()
     {
         controlCubeParent();
-        processCubeCast();
+
+        if ((centerObjectScript != null && !centerObjectScript.isMoving) || centerObjectScript == null)
+        {
+            processCubeCast();
+        }
         if (inCenter)
         {
             rotateCenterObject();
         }
+      
     }
 
     public void rotateCenterObject()
     {
-        centerObject.transform.Rotate(new Vector3(gesture.deltaY, -gesture.deltaX, 0f), Space.World);
+        if(centerObjectScript != null && !centerObjectScript.isMoving)
+        {
+            centerObject.transform.Rotate(new Vector3(gesture.deltaY * 1.5f, -gesture.deltaX * 1.5f, 0f), Space.World);
+        }
     }
 
     public bool inCenter = false;
@@ -306,22 +315,32 @@ public class cubeCaster : MonoBehaviour
     {
         if (!inCenter)
         {
+            if(collider.name != "0")
+            {
+                return;
+            }
             if (!count)
             {
                 collider.GetComponent<playAudioCube>().Play();
-                lastTouchName = collider.name;
+                lastTouchName = collider.transform.parent.name;
                 count = true;
             }
             else
             {
-                if(lastTouchName == collider.name)
+                if(lastTouchName == collider.transform.parent.name)
                 {
                     collider.transform.parent.GetComponent<cubeScript>().ToCenter();
                     centerObject = collider.transform.parent.gameObject;
-                    centerObject.transform.rotation = Quaternion.identity;
+                    centerObjectScript = collider.transform.parent.GetComponent<cubeScript>();
                     lastTouchName = "";
                     inCenter = true;
                     count = false;
+                }
+                else
+                {
+                    collider.GetComponent<playAudioCube>().Play();
+                    lastTouchName = collider.transform.parent.name;
+                    count = true;
                 }
             }
         }
@@ -331,7 +350,7 @@ public class cubeCaster : MonoBehaviour
             if (collider.transform.parent == null)
             {
                 centerObject.GetComponent<cubeScript>().ToInitial();
-                inCenter = false;
+                StartCoroutine(waitForCube());
             }
             if (centerObject.name == collider.transform.parent.name)
             {
@@ -340,10 +359,22 @@ public class cubeCaster : MonoBehaviour
             else
             {
                 centerObject.GetComponent<cubeScript>().ToInitial();
-                inCenter = false;
+                StartCoroutine(waitForCube());
             }
         }
         
+    }
+
+    public IEnumerator waitForCube()
+    {
+        while (centerObjectScript.isMoving)
+        {
+            yield return new WaitForSeconds(0.01f);
+            
+        }
+        inCenter = false;
+        centerObject = null;
+        centerObjectScript = null;
     }
 
     public void processCubeCast()
@@ -370,13 +401,13 @@ public class cubeCaster : MonoBehaviour
                 processRay(hit.collider);
             }
             else
-            {
-                inCenter = false;
+            { 
                 centerObject.GetComponent<cubeScript>().ToInitial();
+                StartCoroutine(waitForCube());
             }
         }
     }
-    public IEnumerator SmoothStopCenter(int steps = 70)
+    public IEnumerator SmoothStopCenter(int steps = 35)
     {
         Debug.Log("smooth stopping");
         float initialX = gesture.deltaX;

@@ -19,12 +19,14 @@ public class cubeScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Transform child in transform)
-        {
-            child.Translate(new Vector3(0f, -0.5f, 0f),Space.World);
-        }
-        initialPlace = transform.position;
-
+       
+        
+        faces[0].transform.localPosition = new Vector3(0, 0.157f, -0.5f);
+        faces[1].transform.localPosition = new Vector3(0, -0.343f, 0);
+        faces[2].transform.localPosition = new Vector3(-0.5f, 0.157f, 0);
+        faces[3].transform.localPosition = new Vector3(0.5f, 0.157f, 0);
+        faces[4].transform.localPosition = new Vector3(0, 0.65f, 0);
+        faces[5].transform.localPosition = new Vector3(0, 0.157f, 0.5f);
 
         for (int i = 0; i < faces.Length; i++)
         {
@@ -43,7 +45,8 @@ public class cubeScript : MonoBehaviour
 
 
     public void ToCenter()
-    {   
+    {
+        initialPlace = transform.position;
         StartCoroutine(moveTo(center.transform.position));  
     }
 

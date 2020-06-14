@@ -8,35 +8,35 @@ public class level_navigator_mainMenu : MonoBehaviour
     public void OpenLetterSubMenu()
     {
         SceneManager.LoadScene("subMenuTemplate");
-        PlayerPrefs.SetString("SubMenuType", "letterSubMenu");
+        PlayerPrefs.SetString("SubMenuType", "буквы");
         PlayerPrefs.SetFloat("subMenuPos", 0.0f);
     }
 
     public void OpenNumbersSubMenu()
     {
         SceneManager.LoadScene("subMenuTemplate");
-        PlayerPrefs.SetString("SubMenuType", "numbersSubMenu");
+        PlayerPrefs.SetString("SubMenuType", "цифры");
         PlayerPrefs.SetFloat("subMenuPos", 0.0f);
     }
 
     public void OpenColorsSubMenu()
     {
         SceneManager.LoadScene("subMenuTemplate");
-        PlayerPrefs.SetString("SubMenuType", "colorsSubMenu");
+        PlayerPrefs.SetString("SubMenuType", "цвета");
         PlayerPrefs.SetFloat("subMenuPos", 0.0f);
     }
 
     public void OpenFiguresSubMenu()
     {
         SceneManager.LoadScene("subMenuTemplate");
-        PlayerPrefs.SetString("SubMenuType", "figuresSubMenu");
+        PlayerPrefs.SetString("SubMenuType", "фигуры");
         PlayerPrefs.SetFloat("subMenuPos", 0.0f);
     }
 
     public void OpenAnimalsSubMenu()
     {
         SceneManager.LoadScene("subMenuTemplate");
-        PlayerPrefs.SetString("SubMenuType", "animalsSubMenu");
+        PlayerPrefs.SetString("SubMenuType", "животные");
         PlayerPrefs.SetFloat("subMenuPos", 0.0f);
     }
 

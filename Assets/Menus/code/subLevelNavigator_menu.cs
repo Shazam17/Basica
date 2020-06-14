@@ -6,57 +6,56 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class subLevelNavigator_menu : MonoBehaviour
-{
-    public GameObject content;
+{ 
+    public Image backLeft;
+    public Image backRight;
+    public Image mainImage;
+    public GameObject menuObject3;
+
     ModuleStrategy subMenuStrategy;
 
-    public VideoPlayer[] player;
-    // Start is called before the first frame update
+
+    void SetBackground()
+    {
+
+    }
+
     void Start()
     {
         string subLevelType = PlayerPrefs.GetString("SubMenuType");
         
         switch (subLevelType)
         {
-            case "letterSubMenu":
+            case "буквы":
                 subMenuStrategy = new LettersStrategy();
-                player[0].clip = Resources.Load<VideoClip>("видосы уровней/буквы1");
-                player[1].clip = Resources.Load<VideoClip>("видосы уровней/буквы2");
-                player[2].clip = Resources.Load<VideoClip>("видосы уровней/буквы3");
                 break;
-            case "numbersSubMenu":
+            case "цифры":
                 subMenuStrategy = new NumbersStrategy();
-                player[0].clip = Resources.Load<VideoClip>("видосы уровней/цифры1");
-                player[1].clip = Resources.Load<VideoClip>("видосы уровней/цифры2");
-                player[2].clip = Resources.Load<VideoClip>("видосы уровней/цифры3");
                 break;
-            case "colorsSubMenu":
+            case "цвета":
                 subMenuStrategy = new ColorsStrategy();
-                player[0].clip = Resources.Load<VideoClip>("видосы уровней/цвета1");
-                player[1].clip = Resources.Load<VideoClip>("видосы уровней/цвета2");
-                player[2].clip = Resources.Load<VideoClip>("видосы уровней/цвета3");
                 break;
-            case "figuresSubMenu":
+            case "фигуры":
                 subMenuStrategy = new FiguresStrategy();
-                player[0].clip = Resources.Load<VideoClip>("видосы уровней/фигуры1");
-                player[1].clip = Resources.Load<VideoClip>("видосы уровней/фигуры2");
-                player[2].clip = Resources.Load<VideoClip>("видосы уровней/фигуры3");
                 break;
-            case "animalsSubMenu":
-
-                Vector2 prevSize = content.GetComponent<RectTransform>().sizeDelta;
-                content.GetComponent<RectTransform>().sizeDelta = new Vector2(prevSize.x * 2/3,prevSize.y);
-                GameObject.Find("Block 3").SetActive(false);
+            case "животные":
+                menuObject3.SetActive(false);
                 subMenuStrategy = new AnimalsStrategy();
-                player[0].clip = Resources.Load<VideoClip>("видосы уровней/животные1");
-                player[1].clip = Resources.Load<VideoClip>("видосы уровней/животные2");
                 break;
 
             default:
                 Debug.Log("undefined behavior");
                 break;
         }
+        Sprite left = Resources.Load<Sprite>("newDesign/subMenuImages/" + subLevelType + "Лево");
+        Sprite right = Resources.Load<Sprite>("newDesign/subMenuImages/" + subLevelType + "Право");
 
+        backLeft.sprite = left;
+        backRight.sprite = right;
+
+        Sprite mainImageSprite = Resources.Load<Sprite>("newDesign/заголовки/" + subLevelType);
+        Debug.Log("newDesign/заголовки/" + subLevelType);
+        mainImage.sprite = mainImageSprite;
       
     }
     

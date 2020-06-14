@@ -297,7 +297,7 @@ public class cubeCaster : MonoBehaviour
         centerObject.transform.Rotate(new Vector3(gesture.deltaY, -gesture.deltaX, 0f), Space.World);
     }
 
-    bool inCenter = false;
+    public bool inCenter = false;
     bool count = false;
     public GameObject centerObject;
     string lastTouchName;
@@ -327,10 +327,20 @@ public class cubeCaster : MonoBehaviour
         }
         else
         {
-            
+            Debug.Log(collider.transform.name);
+            if (collider.transform.parent == null)
+            {
+                centerObject.GetComponent<cubeScript>().ToInitial();
+                inCenter = false;
+            }
             if (centerObject.name == collider.transform.parent.name)
             {
                 collider.GetComponent<playAudioCube>().Play();
+            }
+            else
+            {
+                centerObject.GetComponent<cubeScript>().ToInitial();
+                inCenter = false;
             }
         }
         
@@ -359,13 +369,18 @@ public class cubeCaster : MonoBehaviour
             {
                 processRay(hit.collider);
             }
+            else
+            {
+                inCenter = false;
+                centerObject.GetComponent<cubeScript>().ToInitial();
+            }
         }
     }
     public IEnumerator SmoothStopCenter(int steps = 70)
     {
         Debug.Log("smooth stopping");
         float initialX = gesture.deltaX;
-        float initialY = gesture.deltaY;
+        float initialY = gesture.deltaY ;
         bool stopped = false;
         for (float i = 0; i < steps; i++)
         {

@@ -23,9 +23,10 @@ public class cubeScript : MonoBehaviour
         {
             child.Translate(new Vector3(0f, -0.5f, 0f),Space.World);
         }
+        initialPlace = transform.position;
 
-       
-        for(int i = 0; i < faces.Length; i++)
+
+        for (int i = 0; i < faces.Length; i++)
         {
             faces[i].GetComponent<MeshRenderer>().material.mainTexture = sprites[i];
            
@@ -42,10 +43,8 @@ public class cubeScript : MonoBehaviour
 
 
     public void ToCenter()
-    {
-        initialPlace = transform.position;
-        StartCoroutine(moveTo(center.transform.position));
-       
+    {   
+        StartCoroutine(moveTo(center.transform.position));  
     }
 
     public void ToInitial()

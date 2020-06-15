@@ -14,6 +14,7 @@ public class DragColor_lvl2 : MonoBehaviour, IDragHandler
     {
         initPos = GetComponent<RectTransform>().anchoredPosition;
         StartCoroutine(lockProlog());
+        GetComponent<Animator>().enabled = false;
     }
 
     public void OnDrag(PointerEventData eventData)

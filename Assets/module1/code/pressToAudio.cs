@@ -18,13 +18,13 @@ public class pressToAudio : MonoBehaviour
         }
         save = new SaveLoad(levels.letters);
         //audioSource = GetComponent<AudioSource>();
-        char targetLetter = GameObject.Find("gameManager").GetComponent<createLevel_lvl1_3>().targetLetter;
+        char targetLetter = GameObject.Find("Canvas").GetComponent<createLevel_lvl1_3>().targetLetter;
 
-        if (!GameObject.Find("gameManager").GetComponent<AudioSource>().isPlaying)
+        if (!GameObject.Find("Canvas").GetComponent<AudioSource>().isPlaying)
         {
             if (targetLetter == letter)
             {
-                GameObject.Find("gameManager").GetComponent<createLevel_lvl1_3>().lockLetters();
+                GameObject.Find("Canvas").GetComponent<createLevel_lvl1_3>().lockLetters();
                 save.AddP(letter.ToString());
                 AudioClip cl = OpenGteets.GetGreet();
                 if (!audioSource.isPlaying)

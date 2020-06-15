@@ -5,6 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class level_navigator_mainMenu : MonoBehaviour
 {
+    public GameObject blurBack;
+    public GameObject popUp;
+
+    public void Start()
+    {
+        var wasAsked = PlayerPrefs.GetInt("wasAsked");
+        
+        if (wasAsked != 1)
+        {
+            SceneManager.LoadScene("SplashCheckScreen");
+        }
+    }
+
+    public void ClosePopUp()
+    {
+        popUp.GetComponent<Animator>().Play("popUpDisApear");
+        blurBack.GetComponent<Animator>().Play("BlurDisApear");
+
+    }
+    public void DisablePopUp()
+    {
+        blurBack.SetActive(false);
+        popUp.SetActive(false);
+    }
+
+    public void Navigate(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
+
     public void OpenLetterSubMenu()
     {
         SceneManager.LoadScene("subMenuTemplate");
@@ -42,12 +72,23 @@ public class level_navigator_mainMenu : MonoBehaviour
 
     public void OpenSettings()
     {
-        SceneManager.LoadScene("settings");
+        blurBack.SetActive(true);
+        blurBack.GetComponent<Animator>().Play("BlurApear");
+        popUp.SetActive(true);
+        PopUpScript popUpScript = popUp.GetComponent<PopUpScript>();
+        
+        popUpScript.GenetaratePopUp();
+        popUpScript.scene = "settings";
     }
 
     public void OpenStatistics()
     {
-        SceneManager.LoadScene("statistics");
+        blurBack.SetActive(true);
+        blurBack.GetComponent<Animator>().Play("BlurApear");
+        popUp.SetActive(true);
+        PopUpScript popUpScript = popUp.GetComponent<PopUpScript>();
+        popUpScript.GenetaratePopUp();
+        popUpScript.scene = "statistics";
     }
 
 }

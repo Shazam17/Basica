@@ -17,7 +17,7 @@ public class cubeScript : MonoBehaviour
 
     public bool disabled = false;
     // Start is called before the first frame update
-    void Start()
+    public void Init(AudioSource aS)
     {
        
         
@@ -27,18 +27,19 @@ public class cubeScript : MonoBehaviour
         faces[3].transform.localPosition = new Vector3(0.5f, 0.157f, 0);
         faces[4].transform.localPosition = new Vector3(0, 0.65f, 0);
         faces[5].transform.localPosition = new Vector3(0, 0.157f, 0.5f);
-
+        audioSource = aS;
         for (int i = 0; i < faces.Length; i++)
         {
             faces[i].GetComponent<MeshRenderer>().material.mainTexture = sprites[i];
-           
+            faces[i].GetComponent<playAudioCube>().audioSource = aS;
+                
             if (PlayerPrefs.GetString("voicePath") == "женский/")
             {
-                faces[i].GetComponent<playAudioCube>().GetComponent<AudioSource>().clip = clipsW[i];
+                faces[i].GetComponent<playAudioCube>().clip = clipsW[i];
             }
             else
             {
-                faces[i].GetComponent<playAudioCube>().GetComponent<AudioSource>().clip = clipsM[i];
+                faces[i].GetComponent<playAudioCube>().clip = clipsM[i];
             }
         }
     }

@@ -6,14 +6,11 @@ public class playAudioCube : MonoBehaviour
 {
 
 
-    AudioSource audioSource;
-
+    public AudioSource audioSource;
+    public AudioClip clip;
     public void Start()
     {
-        PlayerPrefs.SetInt("playing", 0);
-        audioSource = GetComponent<AudioSource>();
-
-        
+        PlayerPrefs.SetInt("playing", 0); 
     }
 
     public void Play()
@@ -21,8 +18,9 @@ public class playAudioCube : MonoBehaviour
         int playingGlobal = PlayerPrefs.GetInt("playing");
         if (!audioSource.isPlaying && playingGlobal == 0)
         {
-            StartCoroutine(LockPlaying());
-            audioSource.PlayOneShot(audioSource.clip);
+            audioSource.Stop();
+            //StartCoroutine(LockPlaying());
+            audioSource.PlayOneShot(clip);
         }
      
     }

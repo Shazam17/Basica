@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Menus/mainMenu.unity
     guid: 7798a495646e45a4291b1aa8efcb975d
   - enabled: 1
+    path: Assets/Menus/SplashCheckScreen.unity
+    guid: a9c5d8618d24d5d408de06314cfab52c
+  - enabled: 1
     path: Assets/Menus/statistics.unity
     guid: a490151ec20683c4f986f3cead440928
   - enabled: 1

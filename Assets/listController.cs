@@ -16,15 +16,32 @@ public class listController : MonoBehaviour
 
     public GameObject img;
 
+
+    string selected;
     public string lettersPath = "letters/";
     public string numbersPath = "Грани для букв и цифр/";
     public string colorsPath = "Грани для букв и цифр/";
     public string figuresPath = "Грани для букв и цифр/";
     public string animals = "Грани для букв и цифр/";
+    List<GameObject> spawned;
 
     void Start()
     {
-        string level = PlayerPrefs.GetString("level");
+        spawned = new List<GameObject>();
+    }
+
+    public void loadStat(string level)
+    {
+        if(level == selected)
+        {
+            return;
+        }
+        selected = level;
+        foreach(var go in spawned)
+        {
+            Destroy(go);
+        }
+        spawned.Clear();
         save = new SaveLoad(level);
 
         string path = "";
@@ -64,6 +81,7 @@ public class listController : MonoBehaviour
             }
 
             var go = Instantiate(img);
+            spawned.Add(go);
             go.GetComponent<Image>().sprite = let;
 
             if (letter.Value.toNumber() < 0.4)
@@ -85,9 +103,4 @@ public class listController : MonoBehaviour
 
 
 
-        // Update is called once per frame
-        void Update()
-    {
-        
-    }
 }

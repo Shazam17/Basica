@@ -122,13 +122,7 @@ public class Gesture : MonoBehaviour
                 dir = Direction.STATIC;
                 deltaY = 0;
             }
-        
-               
         }
-        
-
-      
-        
         if (InputController.GetInputUp())
         {
             pressed = false;
@@ -222,7 +216,7 @@ public class cubeCaster : MonoBehaviour
         }
         foreach (var cube in cubes)
         {
-            cube.GetComponent<cubeScript>().audioSource = audioSource;
+            cube.GetComponent<cubeScript>().Init(audioSource);
         }
 
         top -= sizeOfPrefab + marginTop;
@@ -310,7 +304,7 @@ public class cubeCaster : MonoBehaviour
     bool count = false;
     public GameObject centerObject;
     string lastTouchName;
-
+    public GameObject blurBack;
     public void processRay(Collider collider)
     {
         if (!inCenter)
@@ -329,15 +323,18 @@ public class cubeCaster : MonoBehaviour
             {
                 if(lastTouchName == collider.transform.parent.name)
                 {
+                    blurBack.GetComponent<Animator>().Play("BlurApear");
                     collider.transform.parent.GetComponent<cubeScript>().ToCenter();
                     centerObject = collider.transform.parent.gameObject;
                     centerObjectScript = collider.transform.parent.GetComponent<cubeScript>();
                     lastTouchName = "";
                     inCenter = true;
                     count = false;
+                    blurBack.SetActive(true);
                 }
                 else
                 {
+                  
                     collider.GetComponent<playAudioCube>().Play();
                     lastTouchName = collider.transform.parent.name;
                     count = true;
@@ -350,6 +347,7 @@ public class cubeCaster : MonoBehaviour
             if (collider.transform.parent == null)
             {
                 centerObject.GetComponent<cubeScript>().ToInitial();
+                blurBack.GetComponent<Animator>().Play("BlurDisApear");
                 StartCoroutine(waitForCube());
             }
             if (centerObject.name == collider.transform.parent.name)
@@ -359,6 +357,7 @@ public class cubeCaster : MonoBehaviour
             else
             {
                 centerObject.GetComponent<cubeScript>().ToInitial();
+                blurBack.GetComponent<Animator>().Play("BlurDisApear");
                 StartCoroutine(waitForCube());
             }
         }
@@ -379,7 +378,10 @@ public class cubeCaster : MonoBehaviour
 
     public void processCubeCast()
     {
-        
+        if (audioSource.isPlaying)
+        {
+            return;
+        }
         if (InputController.GetInputUp()
             && !gesture.pressed
             && gesture.dir == Direction.STATIC
@@ -403,6 +405,7 @@ public class cubeCaster : MonoBehaviour
             else
             { 
                 centerObject.GetComponent<cubeScript>().ToInitial();
+                blurBack.GetComponent<Animator>().Play("BlurDisApear");
                 StartCoroutine(waitForCube());
             }
         }

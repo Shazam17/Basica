@@ -14,6 +14,13 @@ public class playIntro : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int wasPlayed = PlayerPrefs.GetInt("wasPlayed");
+        if (wasPlayed == 1)
+        {
+            return;
+        }
+        PlayerPrefs.SetInt("wasPlayed", 1);
+
         string path = PlayerPrefs.GetString("voicePath");
         var aS = GetComponent<AudioSource>();
         if (path == "женский/")
@@ -47,9 +54,4 @@ public class playIntro : MonoBehaviour
 
   
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

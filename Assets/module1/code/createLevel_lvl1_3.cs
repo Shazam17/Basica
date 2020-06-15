@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 public class createLevel_lvl1_3 : MonoBehaviour
 {
 
+    public GameObject[] placeToSpawn;
+
     public GameObject letterPrefab;
     public GameObject parent;
 
@@ -15,9 +17,10 @@ public class createLevel_lvl1_3 : MonoBehaviour
 
     public char targetLetter;
 
-    public List<GameObject> letters;
+    List<GameObject> letters;
     void CreateLevel()
     {
+        List<GameObject> places = new List<GameObject>(placeToSpawn);
         letters = new List<GameObject>();
         int lvl = PlayerPrefs.GetInt("lvl1_3_letter");
         if (lvl == 0)
@@ -49,14 +52,8 @@ public class createLevel_lvl1_3 : MonoBehaviour
 
         //chooseLetter to find
 
-        Vector2 vRand; // = Random.insideUnitCircle  * new Vector2(300,100);
-        //vRand.y = Math.Abs(vRand.y);
-        GameObject letter;// = Instantiate(letterPrefab, parent.transform);
-        //letter.GetComponent<RectTransform>().anchoredPosition = vRand;
-        //letters.Add(letter);
-
        
-        //letter.GetComponent<pressToAudio>().letter = let;
+        GameObject letter;
 
         string del = " ";
         if (path == "мужской/"){
@@ -67,58 +64,41 @@ public class createLevel_lvl1_3 : MonoBehaviour
         targetLetter = let;
         AudioClip txt = Resources.Load<AudioClip>(path + "lvl1_3_introSounds/найди.." + del  +  "с буквой " + let.ToString());
 
-        //Debug.Log(path + "lvl1_3_introSounds/найди.. с буквой " + let.ToString());
+
 
         GetComponent<AudioSource>().clip = txt;
         GetComponent<AudioSource>().PlayOneShot(txt);
 
-       // Debug.Log("letters/" + let);
+
+        
+        for (int i = 0; i < placeToSpawn.Length; i++)
+        {
+
+            
+            GameObject tempLet = Instantiate(letterPrefab, parent.transform);
+            tempLet.transform.SetAsLastSibling();
+
+            GameObject place = places[Random.Range(0, places.Count)];
+            tempLet.GetComponent<RectTransform>().anchoredPosition = place.GetComponent<RectTransform>().anchoredPosition;
+            places.Remove(place);
+
+
+            char letterCharTemp = cLEts[Random.Range(0, cLEts.Count)];
+            tempLet.GetComponent<pressToAudio>().letter = letterCharTemp;
+            tempLet.GetComponent<pressToAudio>().audioSource = GetComponent<AudioSource>();
+            cLEts.Remove(letterCharTemp);
+
+
+            Sprite textureTemp = Resources.Load<Sprite>("newDesign/Буквы/Уровень 3/" + letterCharTemp.ToString().ToUpper());
+            tempLet.GetComponent<Image>().sprite = textureTemp;
+
+            letters.Add(tempLet);
+        }
+
+ 
       
-        //letter.GetComponent<Image>().sprite = texture;
-        //letter.GetComponent<pressToAudio>().audioSource = GetComponent<AudioSource>();
 
-
-
-        Vector2 last = new Vector2(-350, -100);
-        for (int i = 0; i < 4; i++)
-        {
-          
-            vRand = last  + new Vector2(100,0) + Random.Range(0.1f,0.5f) * new Vector2(100, 0);
-            last = vRand;
-            GameObject tempLet = Instantiate(letterPrefab, parent.transform);
-            tempLet.transform.SetAsFirstSibling();
-            tempLet.GetComponent<RectTransform>().anchoredPosition = vRand;
-
-            char letterCharTemp = cLEts[Random.Range(0, cLEts.Count)];
-            cLEts.Remove(letterCharTemp);
-            tempLet.GetComponent<pressToAudio>().letter = letterCharTemp;
-            tempLet.GetComponent<pressToAudio>().audioSource = GetComponent<AudioSource>();
-            Sprite textureTemp = Resources.Load<Sprite>("letters/" + letterCharTemp.ToString().ToUpper());
-            letters.Add(tempLet);
-
-            tempLet.GetComponent<Image>().sprite = textureTemp;
-        }
-
-        last = new Vector2(-250, 50);
-        for (int i = 0; i < 4; i++)
-        {
-
-            vRand = last + new Vector2(100, 0) + Random.Range(0.1f, 0.5f) * new Vector2(100, 0);
-            last = vRand;
-            GameObject tempLet = Instantiate(letterPrefab, parent.transform);
-            tempLet.GetComponent<RectTransform>().anchoredPosition = vRand;
-            tempLet.transform.SetAsFirstSibling();
-            char letterCharTemp = cLEts[Random.Range(0, cLEts.Count)];
-            cLEts.Remove(letterCharTemp);
-            tempLet.GetComponent<pressToAudio>().letter = letterCharTemp;
-            tempLet.GetComponent<pressToAudio>().audioSource = GetComponent<AudioSource>();
-            Sprite textureTemp = Resources.Load<Sprite>("letters/" + letterCharTemp.ToString().ToUpper());
-            letters.Add(tempLet);
-
-            tempLet.GetComponent<Image>().sprite = textureTemp;
-        }
-
-        Sprite texture = Resources.Load<Sprite>("letters/" + let.ToString().ToUpper());
+        Sprite texture = Resources.Load<Sprite>("newDesign/Буквы/Уровень 3/" + let.ToString().ToUpper());
         var target = letters[Random.Range(0, letters.Count)].GetComponent<pressToAudio>();
         target.GetComponent<Image>().sprite = texture;
         target.letter = let;

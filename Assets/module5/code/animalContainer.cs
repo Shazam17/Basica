@@ -24,7 +24,6 @@ public class animalContainer : MonoBehaviour
             other.GetComponent<RectTransform>().anchoredPosition = new Vector2(80, 0) + pos;
             other.GetComponent<Transform>().SetAsLastSibling();
             save.AddP(type);
-            //StartCoroutine(Hooks.GetInstance().ToNewLevel("animalsLevel2", audioSource));
         }
         else
         {

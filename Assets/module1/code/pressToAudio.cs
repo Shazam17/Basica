@@ -10,6 +10,7 @@ public class pressToAudio : MonoBehaviour
     SaveLoad save;
 
     public bool lck = false;
+    public createLevel_lvl1_3 create;
     public void onPressButton()
     {
         if (lck)
@@ -18,13 +19,13 @@ public class pressToAudio : MonoBehaviour
         }
         save = new SaveLoad(levels.letters);
         //audioSource = GetComponent<AudioSource>();
-        char targetLetter = GameObject.Find("Canvas").GetComponent<createLevel_lvl1_3>().targetLetter;
+        char targetLetter = create.targetLetter;
 
-        if (!GameObject.Find("Canvas").GetComponent<AudioSource>().isPlaying)
+        if (!create.GetComponent<AudioSource>().isPlaying)
         {
             if (targetLetter == letter)
             {
-                GameObject.Find("Canvas").GetComponent<createLevel_lvl1_3>().lockLetters();
+                create.lockLetters();
                 save.AddP(letter.ToString());
                 AudioClip cl = OpenGteets.GetGreet();
                 if (!audioSource.isPlaying)
@@ -36,6 +37,7 @@ public class pressToAudio : MonoBehaviour
             }
             else
             {
+                Handheld.Vibrate();
                 save.AddM(letter.ToString());
                 save.AddM(targetLetter.ToString());
                 AudioClip cl = OpenGteets.GetDis();

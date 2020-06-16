@@ -13,6 +13,7 @@ public class createLevel_lvl1_3 : MonoBehaviour
     public GameObject letterPrefab;
     public GameObject parent;
 
+
     private string path;
 
     public char targetLetter;
@@ -20,17 +21,16 @@ public class createLevel_lvl1_3 : MonoBehaviour
     List<GameObject> letters;
     void CreateLevel()
     {
+        
+
+
         List<GameObject> places = new List<GameObject>(placeToSpawn);
         letters = new List<GameObject>();
         int lvl = PlayerPrefs.GetInt("lvl1_3_letter");
-        if (lvl == 0)
+      
+        if (lvl == 31)
         {
-            PlayerPrefs.SetInt("lvl1_3_letter", 1);
-            lvl = 1;
-        }
-        else if (lvl == 32)
-        {
-            PlayerPrefs.GetInt("lvl1_3_letter", 1);
+            PlayerPrefs.SetInt("lvl1_3_letter", 0);
         }
         else
         {
@@ -49,11 +49,6 @@ public class createLevel_lvl1_3 : MonoBehaviour
         }
 
         path = Hooks.GetVoicePath();
-
-        //chooseLetter to find
-
-       
-        GameObject letter;
 
         string del = " ";
         if (path == "мужской/"){
@@ -84,8 +79,10 @@ public class createLevel_lvl1_3 : MonoBehaviour
 
 
             char letterCharTemp = cLEts[Random.Range(0, cLEts.Count)];
-            tempLet.GetComponent<pressToAudio>().letter = letterCharTemp;
-            tempLet.GetComponent<pressToAudio>().audioSource = GetComponent<AudioSource>();
+            pressToAudio prs = tempLet.GetComponent<pressToAudio>();
+            prs.letter = letterCharTemp;
+            prs.audioSource = GetComponent<AudioSource>();
+            prs.create = this;
             cLEts.Remove(letterCharTemp);
 
 

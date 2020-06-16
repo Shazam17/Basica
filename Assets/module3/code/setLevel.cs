@@ -35,16 +35,16 @@ public class setLevel : MonoBehaviour
     void Start()
     {
         PlayIntro();
-        Sprite[] colors = Resources.LoadAll<Sprite>("корзины для цветов/");
+        //Sprite[] colors = Resources.LoadAll<Sprite>("корзины для цветов/");
 
-        var colorList = new List<Sprite>(colors);
+        //var colorList = new List<Sprite>(colors);
         foreach(var reciever in recievers)
         {
-            var tSprite = colorList[Random.Range(0, colorList.Count)];
-            colorList.Remove(tSprite);
-            reciever.GetComponent<Image>().sprite = tSprite;
-            reciever.color = tSprite.name;
-            reciever.audioSource = audioSource;
+            //var tSprite = colorList[Random.Range(0, colorList.Count)];
+            //colorList.Remove(tSprite);
+            //reciever.GetComponent<Image>().sprite = tSprite;
+            //reciever.color = tSprite.name;
+            //reciever.audioSource = audioSource;
         }
 
         var recList = new List<ColorReciever_lvl2>(recievers);
@@ -52,7 +52,7 @@ public class setLevel : MonoBehaviour
         {
             ColorReciever_lvl2 tRes = recList[Random.Range(0, recList.Count)];
             recList.Remove(tRes);
-            Sprite[] colorItems = Resources.LoadAll<Sprite>("цвета/предметы/" + tRes.color);
+            Sprite[] colorItems = Resources.LoadAll<Sprite>("цвета_картинки/цвета/предметы/" + tRes.color);
 
             items[i].GetComponent<Image>().sprite = colorItems[Random.Range(0, colorItems.Length)];
             items[i].color = tRes.color;

@@ -8,15 +8,6 @@ public class level_navigator_mainMenu : MonoBehaviour
     public GameObject blurBack;
     public GameObject popUp;
 
-    public void Start()
-    {
-        var wasAsked = PlayerPrefs.GetInt("wasAsked");
-        
-        if (wasAsked != 1)
-        {
-            SceneManager.LoadScene("SplashCheckScreen");
-        }
-    }
 
     public void ClosePopUp()
     {

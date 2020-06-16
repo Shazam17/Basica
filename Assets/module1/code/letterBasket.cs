@@ -46,9 +46,54 @@ public class letterBasket : MonoBehaviour
             }
         }  
     }
+    int lvl;
+    public void RightButton()
+    {
+        if (lvl == 31)
+        {
+            PlayerPrefs.SetInt("lvl1_2_letter", 0);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("lvl1_2_letter", lvl + 1);
+
+        }
+        SceneManager.LoadScene("lettersLevel2");
+    }
+
+    public void LeftButton()
+    {
+        if (lvl == 0)
+        {
+            PlayerPrefs.SetInt("lvl1_2_letter", 31);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("lvl1_2_letter", lvl - 1);
+           
+        }
+        SceneManager.LoadScene("lettersLevel2");
+    }
+
+    public void regenLevel()
+    {
+      
+        SceneManager.LoadScene("lettersLevel2");
+
+    }
 
     public void Start()
     {
+
+        lvl = PlayerPrefs.GetInt("lvl1_2_letter");
+       
+        if (lvl == 31)
+        {
+            PlayerPrefs.SetInt("lvl1_2_letter", 1);
+        }
+
+        
+
         cLEts = new List<char>();
         for(int i = 0; i < 33; i++)
         {
@@ -59,7 +104,7 @@ public class letterBasket : MonoBehaviour
             }  
         }
         save = new SaveLoad(levels.letters);
-        var letterChar = GetRandomLetter();
+        var letterChar = (char)(1072 + lvl);
         path = PlayerPrefs.GetString(playIntro.voicePath);
   
         AudioClip txt = Resources.Load<AudioClip>(path + "Буквы/Уровень 2/перетащи..на букву " + letterChar.ToString());
@@ -71,7 +116,7 @@ public class letterBasket : MonoBehaviour
         List<dragLetter> letts = new List<dragLetter>(letters);
         var chsn = letts[Random.Range(0, letts.Count)];
         letts.Remove(chsn);
-        Sprite textureTemp = Resources.Load<Sprite>("буквы_картинки/Уровень 2/корзины/" + letterChar.ToString().ToUpper());
+        Sprite textureTemp = Resources.Load<Sprite>("буквы_картинки/корзины/" + letterChar.ToString().ToUpper());
         GetComponent<Image>().sprite = textureTemp;
         chsn.setLetter(letter);
 
@@ -86,44 +131,46 @@ public class letterBasket : MonoBehaviour
     bool endLevel = false;
     void OnTriggerEnter2D(Collider2D other)
     {
-       
-            if (letter == other.GetComponent<dragLetter>().letter)
-            {
-                save.AddP(letter.ToString());
-                AudioClip clip = OpenGteets.GetGreet();
-                audioSource = GetComponent<AudioSource>();
-                audioSource.Stop();
 
-                foreach (var obj in letters)
-                {
-                    StartCoroutine(obj.startLock());
-                }
+        if (letter == other.GetComponent<dragLetter>().letter)
+        {
+            PlayerPrefs.SetInt("lvl1_2_letter", lvl + 1);
+            save.AddP(letter.ToString());
+            AudioClip clip = OpenGteets.GetGreet();
+            audioSource = GetComponent<AudioSource>();
+            audioSource.Stop();
+
+            foreach (var obj in letters)
+            {
+                StartCoroutine(obj.startLock());
+            }
             audioSource.PlayOneShot(clip);
-                endLevel = true;
+            endLevel = true;
 
-            }
-            else
+        }
+        else
+        {
+            save.AddM(letter.ToString());
+            save.AddM(other.GetComponent<dragLetter>().letter.ToString());
+            AudioClip clip = OpenGteets.GetDis();
+            audioSource = GetComponent<AudioSource>();
+
+            Handheld.Vibrate();
+            GetComponent<Animator>().Play("letters2BasketFalse");
+            if (!audioSource.isPlaying)
             {
-                save.AddM(letter.ToString());
-                save.AddM(other.GetComponent<dragLetter>().letter.ToString());
-                AudioClip clip = OpenGteets.GetDis();
-                audioSource = GetComponent<AudioSource>();
-
-               
-                if (!audioSource.isPlaying)
-                {
-                    audioSource.PlayOneShot(clip);
-                }
-                other.GetComponent<dragLetter>().GoBack();
-
-                foreach (var obj in letters)
-                {
-                    StartCoroutine(obj.startLock());
-                }
-
+                audioSource.PlayOneShot(clip);
             }
-        
-      
+            other.GetComponent<dragLetter>().GoBack();
+
+            foreach (var obj in letters)
+            {
+                StartCoroutine(obj.startLock());
+            }
+
+        }
+
+
     }
 
     void Update()

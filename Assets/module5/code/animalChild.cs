@@ -4,15 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+
 public class animalChild : MonoBehaviour, IDragHandler
 {
+    string path = "животные_картинки/Уровень 2/детёныши/";
     public string type;
     public bool lck = false;
     Vector2 initPos;
 
     void Awake()
     {
-        Sprite[] sprs = Resources.LoadAll<Sprite>("животные_картинки/Уровень 2/нет");
+        Sprite[] sprs = Resources.LoadAll<Sprite>(path);
         GetComponent<Image>().sprite = sprs[Random.Range(0, sprs.Length)];
         type = sprs[Random.Range(0, sprs.Length)].name;
         StartCoroutine(waitForAudio());
@@ -25,8 +27,7 @@ public class animalChild : MonoBehaviour, IDragHandler
     public void SetParent(string type)
     {
         this.type = type;
-        Sprite spr = Resources.Load<Sprite>("животные_картинки/Уровень 2/нет/" + type);
-        Debug.Log("Setting the child:" + type + " : " + "животные_картинки/Уровень 2/нет/" + type);
+        Sprite spr = Resources.Load<Sprite>(path + type);
         GetComponent<Image>().sprite = spr;
        
     }

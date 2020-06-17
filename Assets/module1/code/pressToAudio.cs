@@ -25,6 +25,17 @@ public class pressToAudio : MonoBehaviour
         {
             if (targetLetter == letter)
             {
+                int lvl = PlayerPrefs.GetInt("lvl1_3_letter");
+                if (lvl == 31)
+                {
+                    PlayerPrefs.SetInt("lvl1_3_letter", 0);
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("lvl1_3_letter", lvl + 1);
+
+                }
+
                 create.lockLetters();
                 save.AddP(letter.ToString());
                 AudioClip cl = OpenGteets.GetGreet();

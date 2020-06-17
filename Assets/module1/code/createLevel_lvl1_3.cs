@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -19,24 +20,21 @@ public class createLevel_lvl1_3 : MonoBehaviour
     public char targetLetter;
 
     List<GameObject> letters;
+
+    public void GenerateNewLevel()
+    {
+        SceneManager.LoadScene("lettersLevel3");
+    }
+
     void CreateLevel()
     {
-        
 
 
         List<GameObject> places = new List<GameObject>(placeToSpawn);
         letters = new List<GameObject>();
         int lvl = PlayerPrefs.GetInt("lvl1_3_letter");
       
-        if (lvl == 31)
-        {
-            PlayerPrefs.SetInt("lvl1_3_letter", 0);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("lvl1_3_letter", lvl + 1);
-
-        }
+        
 
         var cLEts = new List<char>();
         for (int i = 0; i < 32; i++)
@@ -54,7 +52,8 @@ public class createLevel_lvl1_3 : MonoBehaviour
         if (path == "мужской/"){
             del = "";
         }
-        char let = cLEts[Random.Range(0, cLEts.Count)];
+        char let = (char)(1072 + lvl);
+
         cLEts.Remove(let);
         targetLetter = let;
         AudioClip txt = Resources.Load<AudioClip>(path + "lvl1_3_introSounds/найди.." + del  +  "с буквой " + let.ToString());

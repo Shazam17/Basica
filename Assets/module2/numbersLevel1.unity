@@ -255,7 +255,7 @@ MonoBehaviour:
   - {fileID: 499990054}
   - {fileID: 2010202103}
   sprites:
-  - {fileID: 2800000, guid: ae00986f009683847ac748f3c9c15e1c, type: 3}
+  - {fileID: 2800000, guid: 784b484a926ec7f4ba0d69630b6f468a, type: 3}
   - {fileID: 2800000, guid: 844b3b637a6fab847be504f278471a16, type: 3}
   - {fileID: 2800000, guid: be639e307a15ba74bb372ceab39b4355, type: 3}
   - {fileID: 2800000, guid: 84433854441588445a15c347b15b5c27, type: 3}
@@ -950,7 +950,7 @@ MonoBehaviour:
   - {fileID: 2038361335}
   - {fileID: 1199925621}
   sprites:
-  - {fileID: 2800000, guid: 71b8b097b86bffa42a04827400c521c9, type: 3}
+  - {fileID: 2800000, guid: 893750a1dfd04f043b140d138e5f8978, type: 3}
   - {fileID: 2800000, guid: 7c95962132bec8547bbf2eb24aee28a5, type: 3}
   - {fileID: 2800000, guid: 3d3a64a575f700e46b70694f3bf1ef5f, type: 3}
   - {fileID: 2800000, guid: 97bddff7c2701234ab2d19a4855317f3, type: 3}
@@ -1891,7 +1891,7 @@ MonoBehaviour:
   - {fileID: 1240708931}
   - {fileID: 1942721799}
   sprites:
-  - {fileID: 2800000, guid: de59ea52cd2a9b849a6e261eb9e961a8, type: 3}
+  - {fileID: 2800000, guid: 7691bd43280ff9140b00ca94aa56fb18, type: 3}
   - {fileID: 2800000, guid: 603b9d5f1e1a414409f0cea3131edd86, type: 3}
   - {fileID: 2800000, guid: e58c21c727a656a428d7d1be74f32250, type: 3}
   - {fileID: 2800000, guid: a6a3fd5b658c42344a43441a7558d874, type: 3}
@@ -2069,7 +2069,7 @@ MonoBehaviour:
   - {fileID: 29837622}
   - {fileID: 1083999530}
   sprites:
-  - {fileID: 2800000, guid: 1aff32fdb14ed3647a9e1763afd07b0b, type: 3}
+  - {fileID: 2800000, guid: 08d2389ae3d5ce740ab3ab5c768f46ce, type: 3}
   - {fileID: 2800000, guid: 1841c56551c7b1b4ab95e49a5e983ab8, type: 3}
   - {fileID: 2800000, guid: d2e649adc9f0f60478d4c4ab938bf090, type: 3}
   - {fileID: 2800000, guid: b6d76a4b4b4b52f448fee6c95e32232e, type: 3}
@@ -2805,7 +2805,7 @@ MonoBehaviour:
   - {fileID: 1329311859}
   - {fileID: 1609787056}
   sprites:
-  - {fileID: 2800000, guid: f2b3b1361e66e2d499878a3caf9391e2, type: 3}
+  - {fileID: 2800000, guid: b2d2b86dd4691dc429c456ded07c2cc6, type: 3}
   - {fileID: 2800000, guid: e05619661009b374585f60fe6240b26e, type: 3}
   - {fileID: 2800000, guid: 609b5687732fe204a881f188a5b557a3, type: 3}
   - {fileID: 2800000, guid: a1f81b1838df6284284bc81fc8afb24b, type: 3}
@@ -3075,7 +3075,7 @@ MonoBehaviour:
   - {fileID: 2061996261}
   - {fileID: 1805078876}
   sprites:
-  - {fileID: 2800000, guid: f6673c577b05c2649ae72689455be91e, type: 3}
+  - {fileID: 2800000, guid: 8cdbcff59a8c2b943af64576cf23e62d, type: 3}
   - {fileID: 2800000, guid: 40851633a3abe634bbe1ef7c28ac5c5b, type: 3}
   - {fileID: 2800000, guid: 730b2bc833e6e04448344f0f125dcc2b, type: 3}
   - {fileID: 2800000, guid: 4da5bb168a89c80478e65741290d8784, type: 3}
@@ -3788,7 +3788,7 @@ MonoBehaviour:
   - {fileID: 333357930}
   - {fileID: 487732478}
   sprites:
-  - {fileID: 2800000, guid: 17a74e47460a7ad4c851bded25f9d7bc, type: 3}
+  - {fileID: 2800000, guid: 348b7db7a34069c4e8cf56df26aa613d, type: 3}
   - {fileID: 2800000, guid: 7890777d2a59d4d4fa516cf2c3535ad1, type: 3}
   - {fileID: 2800000, guid: 4ed98e3664699f847a42fd5f2c0a70db, type: 3}
   - {fileID: 2800000, guid: 33e89eeed77863b47b2fb79616d4a011, type: 3}
@@ -4942,9 +4942,9 @@ RectTransform:
   m_Father: {fileID: 1712722763}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 359.3, y: -145}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -40.700012, y: 80}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1165727745
@@ -6110,7 +6110,7 @@ MonoBehaviour:
   - {fileID: 343047666}
   - {fileID: 1123605221}
   sprites:
-  - {fileID: 2800000, guid: d5486478fa471524397674f5321b6449, type: 3}
+  - {fileID: 2800000, guid: 2294e98f0b19b5241b59c009c3c0c967, type: 3}
   - {fileID: 2800000, guid: e8b6ee2789f77854d965f6f4d95449bf, type: 3}
   - {fileID: 2800000, guid: d8dafabe166f2ac4e9cb8d263fb75356, type: 3}
   - {fileID: 2800000, guid: f0b1e4a71cb5d554d83b34e975fd4699, type: 3}
@@ -6826,18 +6826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08baa3d19a3754108af85534c7824251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnableMultiTouch: 1
-  TreatMousePointerAsFinger: 1
-  TreatMouseWheelAsFingers: 0
-  SimulateMouseWithTouches: 0
-  ProcessUnityTouches: 1
-  RequireControlKeyForMouseZoom: 1
-  MouseDistanceInUnitsForScaleAndRotate: 2
-  MouseWheelDeltaMultiplier: 0.025
-  PassThroughObjects: []
-  AutoAddRequiredComponents: 1
-  DefaultDPI: 200
-  LevelUnloadOption: 2
 --- !u!224 &1616255544
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6963,7 +6951,7 @@ PrefabInstance:
     - target: {fileID: 4552291907271734222, guid: 41250f8c8d7fd9b4c93b99bb9c809489,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -338
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 4552291907271734222, guid: 41250f8c8d7fd9b4c93b99bb9c809489,
         type: 3}
@@ -6983,7 +6971,7 @@ PrefabInstance:
     - target: {fileID: 4552291907271734222, guid: 41250f8c8d7fd9b4c93b99bb9c809489,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4552291907271734222, guid: 41250f8c8d7fd9b4c93b99bb9c809489,
         type: 3}
@@ -6993,7 +6981,7 @@ PrefabInstance:
     - target: {fileID: 4552291907271734222, guid: 41250f8c8d7fd9b4c93b99bb9c809489,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4552291907271734222, guid: 41250f8c8d7fd9b4c93b99bb9c809489,
         type: 3}
@@ -7329,7 +7317,7 @@ MonoBehaviour:
   - {fileID: 221423558}
   - {fileID: 409646630}
   sprites:
-  - {fileID: 2800000, guid: 1d9a5f03584c2374cbcba82cc26506f3, type: 3}
+  - {fileID: 2800000, guid: 141c1d543125faf449069eb631054458, type: 3}
   - {fileID: 2800000, guid: a1cb98163ed574c41b5da5a9e31efb7c, type: 3}
   - {fileID: 2800000, guid: 7135978743988874d8e596419ed9e8d2, type: 3}
   - {fileID: 2800000, guid: 306022ca2912ed0458c7480a15c93e26, type: 3}
@@ -8172,7 +8160,7 @@ MonoBehaviour:
   - {fileID: 2042828288}
   - {fileID: 2142505775}
   sprites:
-  - {fileID: 2800000, guid: 5d775a78d708fb34cb35fcc7cd722dc6, type: 3}
+  - {fileID: 2800000, guid: 4f030db643b188d4f914d5474d907ae4, type: 3}
   - {fileID: 2800000, guid: 868543019a1c99c4f8775ef6ed19e73c, type: 3}
   - {fileID: 2800000, guid: ed8b566745ba5e04da54ef55f23d54cb, type: 3}
   - {fileID: 2800000, guid: f2ce6807d050912468c90fde1e815fc0, type: 3}

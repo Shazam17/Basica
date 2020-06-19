@@ -201,17 +201,19 @@ public class cubeCaster : MonoBehaviour
         for (int i = 0; i < 14; i++)
         {
             float left = -11.5f + offset;
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 4; j++)
             {
-                if (j + 3 * i < cubes.Length)
+                if (j + 4 * i < cubes.Length)
                 {
                     cubes[j].transform.position = new Vector3(left, top, 0);
-                    cubes[j + 3 * i].transform.position = new Vector3(left, top - offset * i, 0);
-                    cubes[j + 3 * i].transform.Rotate(new Vector3(-10, 10, 0));
+                    cubes[j].transform.localScale = new Vector3(3, 3, 3);
+                    cubes[j + 4 * i].transform.position = new Vector3(left, top - marginTop * i, 0);
+                    cubes[j + 4 * i].transform.Rotate(new Vector3(-10, 10, 0));
+                    cubes[j + 4 * i].transform.localScale = new Vector3(3, 3, 3);
                 }
 
 
-                left += offset + marginLeft;
+                left += marginLeft;
             }
         }
         foreach (var cube in cubes)
@@ -331,6 +333,7 @@ public class cubeCaster : MonoBehaviour
                     inCenter = true;
                     count = false;
                     blurBack.SetActive(true);
+                    collider.transform.parent.GetComponent<Animator>().Play("cubeZoom");
                 }
                 else
                 {
@@ -347,6 +350,7 @@ public class cubeCaster : MonoBehaviour
             if (collider.transform.parent == null)
             {
                 centerObject.GetComponent<cubeScript>().ToInitial();
+                centerObject.GetComponent<Animator>().Play("cubeZoomOut");
                 blurBack.GetComponent<Animator>().Play("BlurDisApear");
                 StartCoroutine(waitForCube());
             }
@@ -357,6 +361,7 @@ public class cubeCaster : MonoBehaviour
             else
             {
                 centerObject.GetComponent<cubeScript>().ToInitial();
+                centerObject.GetComponent<Animator>().Play("cubeZoomOut");
                 blurBack.GetComponent<Animator>().Play("BlurDisApear");
                 StartCoroutine(waitForCube());
             }
@@ -405,6 +410,7 @@ public class cubeCaster : MonoBehaviour
             else
             { 
                 centerObject.GetComponent<cubeScript>().ToInitial();
+                centerObject.GetComponent<Animator>().Play("cubeZoomOut");
                 blurBack.GetComponent<Animator>().Play("BlurDisApear");
                 StartCoroutine(waitForCube());
             }

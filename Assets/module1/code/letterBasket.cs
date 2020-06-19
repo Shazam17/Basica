@@ -20,7 +20,7 @@ public class letterBasket : MonoBehaviour
     private string path;
     private SaveLoad save;
     private List<char> cLEts;
-
+    public Text targetText;
     public static char GetRandomLetter()
     {
         int letterIndex = Random.Range(0, 31);
@@ -33,12 +33,13 @@ public class letterBasket : MonoBehaviour
         return lettterChar;
     }
 
-  
+    public PlayStartAnimation handAnimation;
 
     public void PlayIntro()
     {
         if (!audioSource.isPlaying)
         {
+            handAnimation.PlayAnimation();
             audioSource.PlayOneShot(intro);
             foreach(var let in letters)
             {
@@ -116,8 +117,9 @@ public class letterBasket : MonoBehaviour
         List<dragLetter> letts = new List<dragLetter>(letters);
         var chsn = letts[Random.Range(0, letts.Count)];
         letts.Remove(chsn);
-        Sprite textureTemp = Resources.Load<Sprite>("буквы_картинки/корзины/" + letterChar.ToString().ToUpper());
-        GetComponent<Image>().sprite = textureTemp;
+        targetText.text = letter.ToString();
+        //Sprite textureTemp = Resources.Load<Sprite>("буквы_картинки/корзины/" + letterChar.ToString().ToUpper());
+        //GetComponent<Image>().sprite = textureTemp;
         chsn.setLetter(letter);
 
         foreach(var l in letts)
@@ -128,18 +130,26 @@ public class letterBasket : MonoBehaviour
         }
 
     }
+    public AnimationClip fallInBoxClip;
     bool endLevel = false;
     void OnTriggerEnter2D(Collider2D other)
     {
 
         if (letter == other.GetComponent<dragLetter>().letter)
         {
+            //Perform animation
+            GameObject targetImage = other.gameObject.transform.GetChild(0).gameObject;
+            targetImage.transform.SetParent(gameObject.transform);
+            targetImage.transform.SetAsFirstSibling();
+            targetImage.GetComponent<Animator>().enabled = true;
+            targetImage.GetComponent<Animator>().Play(fallInBoxClip.name);
+
             PlayerPrefs.SetInt("lvl1_2_letter", lvl + 1);
             save.AddP(letter.ToString());
             AudioClip clip = OpenGteets.GetGreet();
             audioSource = GetComponent<AudioSource>();
             audioSource.Stop();
-
+            GetComponent<Animator>().Play("basket2True");
             foreach (var obj in letters)
             {
                 StartCoroutine(obj.startLock());
@@ -173,13 +183,10 @@ public class letterBasket : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if(!audioSource.isPlaying && endLevel)
-        {
-            SceneManager.LoadScene("lettersLevel2");
 
-        }
+    public void toNewLevel()
+    {
+        SceneManager.LoadScene("lettersLevel2");
     }
 
     void OnTriggerExit2D(Collider2D other)

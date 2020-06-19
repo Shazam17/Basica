@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class endLevel_lvl2 : MonoBehaviour
 {
-    public ColorReciever_lvl2[] recievers;
+    public testColliderBox[] recievers;
     public DragColor_lvl2[] colors;
     public AudioSource audioSource;
 

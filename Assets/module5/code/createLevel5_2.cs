@@ -29,6 +29,7 @@ public class createLevel5_2 : MonoBehaviour
     {  
         audioSource = GetComponent<AudioSource>();
         AudioClip clip = Resources.Load<AudioClip>(Hooks.GetVoicePath() + "Животные/Уровень 2/перетащи.. родителю");
+     
         audioSource.PlayOneShot(clip);
         this.clip = clip;
         Sprite[] par = Resources.LoadAll<Sprite>("животные_картинки/Уровень 2/родители/");

@@ -13,13 +13,27 @@ public class OpenSubMenuButton : MonoBehaviour
         
     }
 
-    public void BackToSubMenu()
+   
+
+    public IEnumerator backToMenuAsync()
     {
+        yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadScene("mainMenu");
+    }
+
+    public IEnumerator backToSubMenuAsync()
+    {
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene("subMenuTemplate");
     }
 
+
+    public void BackToSubMenu()
+    {
+        StartCoroutine(backToSubMenuAsync());
+    }
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene("mainMenu");
+        StartCoroutine(backToMenuAsync());
     }
 }

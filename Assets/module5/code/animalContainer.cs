@@ -27,6 +27,7 @@ public class animalContainer : MonoBehaviour
         }
         else
         {
+            Handheld.Vibrate();
             save.AddM(type);
             save.AddM(otherType);
             Hooks.GetInstance().PlayDis(audioSource);

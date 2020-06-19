@@ -3451,8 +3451,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1327894576}
-        m_MethodName: OpenStatistics
+      - m_Target: {fileID: 777417643}
+        m_MethodName: PlayClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3462,8 +3462,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 777417643}
-        m_MethodName: PlayClickSound
+      - m_Target: {fileID: 1327894576}
+        m_MethodName: OpenStatistics
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

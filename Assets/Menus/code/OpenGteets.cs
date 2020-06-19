@@ -22,7 +22,7 @@ public class OpenGteets : MonoBehaviour
     public static AudioClip GetGreet()
     {
         string path = PlayerPrefs.GetString(playIntro.voicePath);
-        Object[] txt = Resources.LoadAll(path + "greets",typeof(AudioClip));
+        AudioClip[] txt = Resources.LoadAll<AudioClip>(path + "greets/");
 
         AudioClip clip = txt[Random.Range(0, txt.Length)] as AudioClip;
 
@@ -32,7 +32,7 @@ public class OpenGteets : MonoBehaviour
     public static AudioClip GetDis()
     {
         string path = PlayerPrefs.GetString(playIntro.voicePath);
-        Object[] txt = Resources.LoadAll(path + "disRespect", typeof(AudioClip));
+        AudioClip[] txt = Resources.LoadAll<AudioClip>(path + "disRespect/");
 
         AudioClip clip = txt[Random.Range(0, txt.Length)] as AudioClip;
 

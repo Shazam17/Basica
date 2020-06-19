@@ -18,6 +18,12 @@ public class selectColor : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if(picker.lastSelect != null)
+        {
+            picker.lastSelect.GetComponent<Image>().color = picker.lastSelect.color;
+        }
+        picker.lastSelect = this;
+        GetComponent<Image>().color = picker.selectColor;
         picker.selectedColor = color;
     }
 }

@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1300245974}
   enbld: 1
 --- !u!114 &582517030
 MonoBehaviour:
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1300245974}
   enbld: 1
 --- !u!61 &869046978
 BoxCollider2D:
@@ -1388,7 +1388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1300245974}
   enbld: 1
 --- !u!61 &1521068269
 BoxCollider2D:

@@ -4,17 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems; // Required when using Event data.
 
-public class dragLetter : MonoBehaviour,IDragHandler
+public class dragLetter : MonoBehaviour,IDragHandler, IPointerClickHandler
 {
     public char letter;
     public Transform pos;
     private Vector2 initPlace;
 
+    Animator childAnimator;
+
     public void Awake()
     {
         initPlace = GetComponent<RectTransform>().anchoredPosition;
         StartCoroutine(startLock());
-    
+        childAnimator = GetComponentInChildren<Animator>();
     }
 
 
@@ -32,7 +34,7 @@ public class dragLetter : MonoBehaviour,IDragHandler
     {
         Debug.Log(l);
         Sprite[] txts = Resources.LoadAll<Sprite>("буквы_картинки/Уровень 2/" + l.ToString());
-        GetComponent<Image>().sprite = txts[Random.Range(0,txts.Length)] ;
+        GetComponentInChildren<Image>().sprite = txts[Random.Range(0,txts.Length)] ;
         letter = l;
     }
   
@@ -41,6 +43,7 @@ public class dragLetter : MonoBehaviour,IDragHandler
     {
         if (!lck && !isPlaying && Screen.safeArea.Contains(eventData.position))
         {
+            childAnimator.enabled = false;
             transform.position = eventData.position;
         }
       
@@ -71,5 +74,10 @@ public class dragLetter : MonoBehaviour,IDragHandler
         {
             lck = false;
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        childAnimator.enabled = true;
     }
 }

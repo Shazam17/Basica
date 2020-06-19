@@ -32,7 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/module1/lettersLevel2.unity
     guid: 8c84b9b20c5815840ac600cd4565e481
-  - enabled: 1
+  - enabled: 0
     path: Assets/module1/lettersLevel3.unity
     guid: 3989d2f49b28b7648947c4888f690c00
   - enabled: 1
@@ -53,6 +53,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/module3/colorsLevel3.unity
     guid: 1f27fc5a2e24a1449a2955211312a339
+  - enabled: 1
+    path: Assets/module4/FiguresLevel1New.unity
+    guid: 0fc112aff0f9d8d4880276776fde5313
   - enabled: 1
     path: Assets/module4/FiguresLevel1.unity
     guid: a712d80d8d391a342bcfa4751b7e8476

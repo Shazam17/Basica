@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayStartAnimation : MonoBehaviour
 {
-    public PlayAnimationStart play;
+    public AnimationClip startAnimation;
+    //public AnimationClip clickClip;
 
-
-    public void PlayAnimationStart()
+    void Start()
     {
-        play.PlayStart();
+        PlayAnimation();
+    }
+
+   public void PlayAnimation()
+    {
+        GetComponent<Animator>().Play(startAnimation.name);
+
     }
 }

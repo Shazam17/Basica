@@ -14,7 +14,7 @@ public class numberCounter_lvl2 : MonoBehaviour
     public GameObject spawningObject;
     public Transform parent;
     public AudioSource audioSource;
-
+    public Text text;
     List<dragNumber> numbers;
 
     bool lck = false;
@@ -51,9 +51,9 @@ public class numberCounter_lvl2 : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         int randNumber = Random.Range(1, 10);
 
-        Sprite textureTemp = Resources.Load<Sprite>("lvl2_2_basket/" + randNumber.ToString());
-        GetComponent<Image>().sprite = textureTemp;
-
+        //Sprite textureTemp = Resources.Load<Sprite>("lvl2_2_basket/" + randNumber.ToString());
+        //GetComponent<Image>().sprite = textureTemp;
+        text.text = randNumber.ToString();
         foreach(var clip in targetClips)
         {
             if (clip.name.Contains(" " + randNumber.ToString() + " "))
@@ -106,7 +106,10 @@ public class numberCounter_lvl2 : MonoBehaviour
             }
             save.AddP(targerCount.ToString());
             audioSource.Stop();
-            StartCoroutine(Hooks.GetInstance().ToNewLevel("numbersLevel2", audioSource));
+            AudioClip clip = OpenGteets.GetGreet();
+            audioSource.PlayOneShot(clip);
+            //StartCoroutine(Hooks.GetInstance().ToNewLevel("numbersLevel2", audioSource));
+            GetComponent<Animator>().Play("basket2True");
         }
         else
         {
@@ -126,6 +129,11 @@ public class numberCounter_lvl2 : MonoBehaviour
         }
     }
 
+
+    public void toNewLevel()
+    {
+        SceneManager.LoadScene("numbersLevel2");
+    }
     public void OnTriggerEnter2D(Collider2D other)
     {
         counter += other.GetComponent<dragNumber>().weight;

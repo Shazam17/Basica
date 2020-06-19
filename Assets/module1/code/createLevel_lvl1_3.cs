@@ -29,11 +29,18 @@ public class createLevel_lvl1_3 : MonoBehaviour
     void CreateLevel()
     {
 
+        GameObject[] backs = Resources.LoadAll<GameObject>("Фоны Уровень 3/");
+        Debug.Log(backs.Length);
+        var plc = Instantiate(backs[Random.Range(0, backs.Length)]);
+        plc.transform.SetParent(parent.transform);
+        plc.transform.SetAsFirstSibling();
+        plc.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        
 
-        List<GameObject> places = new List<GameObject>(placeToSpawn);
+
+        List<RectTransform> places = new List<RectTransform>(plc.GetComponentsInChildren<RectTransform>());
         letters = new List<GameObject>();
         int lvl = PlayerPrefs.GetInt("lvl1_3_letter");
-      
         
 
         var cLEts = new List<char>();
@@ -65,15 +72,15 @@ public class createLevel_lvl1_3 : MonoBehaviour
 
 
         
-        for (int i = 0; i < placeToSpawn.Length; i++)
+        for (int i = 0; i < 6; i++)
         {
 
             
             GameObject tempLet = Instantiate(letterPrefab, parent.transform);
             tempLet.transform.SetAsLastSibling();
 
-            GameObject place = places[Random.Range(0, places.Count)];
-            tempLet.GetComponent<RectTransform>().anchoredPosition = place.GetComponent<RectTransform>().anchoredPosition;
+            RectTransform place = places[Random.Range(0, places.Count)];
+            tempLet.GetComponent<RectTransform>().anchoredPosition = place.anchoredPosition;
             places.Remove(place);
 
 

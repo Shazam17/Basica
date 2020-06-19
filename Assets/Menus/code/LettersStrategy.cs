@@ -70,7 +70,7 @@ public class FiguresStrategy : ModuleStrategy
 {
     public void LoadLevel1()
     {
-        SceneManager.LoadScene("figuresLevel1");
+        SceneManager.LoadScene("FiguresLevel1New");
     }
 
     public void LoadLevel2()

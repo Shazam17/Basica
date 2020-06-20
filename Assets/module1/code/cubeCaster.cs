@@ -173,27 +173,27 @@ public class cubeCaster : MonoBehaviour
         string path = Hooks.GetVoicePath();
         if(type == levelType.letters)
         {
-            AudioClip clip = Resources.Load<AudioClip>(path + "Буквы/Уровень 1/поизучаем буквы");
-            audioSource.PlayOneShot(clip);
-            this.clip = clip;
+            AudioClip clipLoad = Resources.Load<AudioClip>(path + "Буквы/Уровень 1/поизучаем буквы");
+            audioSource.PlayOneShot(clipLoad);
+            this.clip = clipLoad;
             
         }else if(type == levelType.numbers)
         {
-            AudioClip clip = Resources.Load<AudioClip>(path + "Цифры/Уровень 1 пролог/поизучаем цифры");
-            audioSource.PlayOneShot(clip);
-            this.clip = clip;
+            AudioClip clipLoad = Resources.Load<AudioClip>(path + "Цифры/Уровень 1 пролог/поизучаем цифры");
+            audioSource.PlayOneShot(clipLoad);
+            this.clip = clipLoad;
         }
         else if(type == levelType.colors)
         {
-            AudioClip clip = Resources.Load<AudioClip>(path + "Цвета/Уровень 1 пролог/поизучаем цвета");
-            audioSource.PlayOneShot(clip);
-            this.clip = clip;
+            AudioClip clipLoad = Resources.Load<AudioClip>(path + "Цвета/Уровень 1 пролог/поизучаем цвета");
+            audioSource.PlayOneShot(clipLoad);
+            this.clip = clipLoad;
         }
         else if (type == levelType.figures)
         {
-            AudioClip clip = Resources.Load<AudioClip>(path + "Фигуры/Уровень 1 пролог/поизучаем фигуры");
-            audioSource.PlayOneShot(clip);
-            this.clip = clip;
+            AudioClip clipLoad = Resources.Load<AudioClip>(path + "Фигуры/Уровень 1 пролог/поизучаем фигуры");
+            audioSource.PlayOneShot(clipLoad);
+            this.clip = clipLoad;
         }
         //StartCoroutine(waitPress(2.0f));
 

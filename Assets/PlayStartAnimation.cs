@@ -10,11 +10,17 @@ public class PlayStartAnimation : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(Delayed());
+    }
+    IEnumerator Delayed()
+    {
+        yield return new WaitForSeconds(0.2f);
+
         PlayAnimation();
     }
-
-   public void PlayAnimation()
+    public void PlayAnimation()
     {
+        transform.SetAsLastSibling();
         GetComponent<Animator>().Play(startAnimation.name);
 
     }

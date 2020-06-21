@@ -156,7 +156,7 @@ public class letterBasket : MonoBehaviour
             }
             audioSource.PlayOneShot(clip);
             endLevel = true;
-
+            StartCoroutine(toNewLevel());
         }
         else
         {
@@ -184,8 +184,9 @@ public class letterBasket : MonoBehaviour
     }
 
 
-    public void toNewLevel()
+    public IEnumerator toNewLevel()
     {
+        yield return new WaitForSeconds(1.2f);
         SceneManager.LoadScene("lettersLevel2");
     }
 

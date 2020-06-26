@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class endLevel_lvl3 : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class endLevel_lvl3 : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+
+    public void ToNewLevel()
+    {
+        SceneManager.LoadScene("figuresLevel3");
     }
 
     public void OnPressButton()
@@ -26,9 +33,19 @@ public class endLevel_lvl3 : MonoBehaviour
 
         if (count == 4)
         {
+            foreach (var figure in figures)
+            {
+                figure.lck = true ;
+            }
+
             audioSource.Stop();
             StartCoroutine(Hooks.GetInstance().ToNewLevel("figuresLevel3", audioSource));
         }
+        else
+        {
+           
+        }
     
     }
+
 }

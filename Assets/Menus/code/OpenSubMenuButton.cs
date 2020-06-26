@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class OpenSubMenuButton : MonoBehaviour
 {
 
+    public AudioSource audioSource;
+    public AudioClip clip;
+
     void Start()
     {
         RectTransform tr = GetComponent<RectTransform>();
@@ -13,7 +16,15 @@ public class OpenSubMenuButton : MonoBehaviour
         
     }
 
-   
+
+    public void Click()
+    {
+        audioSource.PlayOneShot(clip);
+    }
+   public void backToChoosePaint()
+    {
+        SceneManager.LoadScene("ColorsLevel3Choose");
+    }
 
     public IEnumerator backToMenuAsync()
     {

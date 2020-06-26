@@ -13,7 +13,7 @@ public class DragColor_lvl2 : MonoBehaviour, IDragHandler
     void Start()
     {
         initPos = GetComponent<RectTransform>().anchoredPosition;
-        StartCoroutine(lockProlog());
+        //StartCoroutine(lockProlog());
         GetComponent<Animator>().enabled = false;
     }
 
@@ -44,11 +44,10 @@ public class DragColor_lvl2 : MonoBehaviour, IDragHandler
         yield return new WaitForSeconds(4.0f);
         lck = false;
     }
+
     private IEnumerator toInitPlace()
     {
         lck = true;
-
-        //
         var rect = GetComponent<RectTransform>();
         Vector2 diff = initPos - rect.anchoredPosition;
         while (diff.magnitude > 0.5f)

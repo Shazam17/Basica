@@ -15,7 +15,7 @@ public class dragLetter : MonoBehaviour,IDragHandler, IPointerClickHandler
     public void Awake()
     {
         initPlace = GetComponent<RectTransform>().anchoredPosition;
-        StartCoroutine(startLock());
+        //StartCoroutine(startLock());
         childAnimator = GetComponentInChildren<Animator>();
     }
 

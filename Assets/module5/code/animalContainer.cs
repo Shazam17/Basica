@@ -23,6 +23,7 @@ public class animalContainer : MonoBehaviour
             Vector2 pos = GetComponent<RectTransform>().anchoredPosition;
             other.GetComponent<RectTransform>().anchoredPosition = new Vector2(80, 0) + pos;
             other.GetComponent<Transform>().SetAsLastSibling();
+            //GameObject.FindGameObjectWithTag("Finish").transform.SetAsLastSibling();
             save.AddP(type);
         }
         else

@@ -15,7 +15,6 @@ public class animalBatch : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(lockProlog());
     }
 
     public void Play()

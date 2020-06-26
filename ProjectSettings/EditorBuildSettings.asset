@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Menus/SplashCheckScreen.unity
     guid: a9c5d8618d24d5d408de06314cfab52c
@@ -32,7 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/module1/lettersLevel2.unity
     guid: 8c84b9b20c5815840ac600cd4565e481
-  - enabled: 0
+  - enabled: 1
     path: Assets/module1/lettersLevel3.unity
     guid: 3989d2f49b28b7648947c4888f690c00
   - enabled: 1
@@ -83,4 +80,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Menus/dbDump.unity
     guid: 553715b941f42cd44bfeb07bbea7327c
+  - enabled: 1
+    path: Assets/module3/ColorsLevel3Choose.unity
+    guid: 28b652a4eb140d7409000527c3015fd4
   m_configObjects: {}

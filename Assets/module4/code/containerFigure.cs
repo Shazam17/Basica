@@ -8,6 +8,15 @@ public class containerFigure : MonoBehaviour
     public string type;
     public AudioSource audioSource;
 
+
+    public GreetParticle particles;
+
+
+    public void ToNewLevel()
+    {
+        SceneManager.LoadScene("figuresLevel2");
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         SaveLoad save = new SaveLoad(levels.figures);
@@ -17,6 +26,7 @@ public class containerFigure : MonoBehaviour
         {
             if(!fig.isActive)
             {
+                particles.TurnParticleOn();
                 var obj = GameObject.Find("Canvas").GetComponent<chooseVoice>();
                 obj.lck = true;
                 obj.LockItems();
@@ -30,7 +40,8 @@ public class containerFigure : MonoBehaviour
         {
 
             if (!fig.isActive && !audioSource.isPlaying)
-            {              
+            {
+                Handheld.Vibrate();
                 Debug.Log(type.Split(' ')[0]);
                 Debug.Log(fig.type.Split(' ')[0]);
                 save.AddM(fig.type.Split(' ')[0]);

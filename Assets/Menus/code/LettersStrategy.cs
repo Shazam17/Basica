@@ -62,7 +62,7 @@ public class ColorsStrategy : ModuleStrategy
 
     public void LoadLevel3()
     {
-        SceneManager.LoadScene("colorsLevel3");
+        SceneManager.LoadScene("colorsLevel3Choose");
     }
 }
 

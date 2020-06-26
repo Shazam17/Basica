@@ -11,6 +11,10 @@ public class pressToAudio : MonoBehaviour
 
     public bool lck = false;
     public createLevel_lvl1_3 create;
+
+
+    public GreetParticle particles;
+
     public void onPressButton()
     {
         if (lck)
@@ -25,6 +29,7 @@ public class pressToAudio : MonoBehaviour
         {
             if (targetLetter == letter)
             {
+                particles.TurnParticleOn();
                 int lvl = PlayerPrefs.GetInt("lvl1_3_letter");
                 if (lvl == 31)
                 {
@@ -51,15 +56,29 @@ public class pressToAudio : MonoBehaviour
                 Handheld.Vibrate();
                 save.AddM(letter.ToString());
                 save.AddM(targetLetter.ToString());
-                AudioClip cl = OpenGteets.GetDis();
-                if (!audioSource.isPlaying)
-                {
-                    audioSource.PlayOneShot(cl);
-                }
+                StartCoroutine(waitFalse());
             }
         }
       
 
+    }
+
+    public IEnumerator waitFalse()
+    {
+        if (!audioSource.isPlaying)
+        {
+            string path = Hooks.GetVoicePath();
+            var letterClip = Resources.Load<AudioClip>(path + "Буквы/Уровень 1/буква " + letter);
+         
+            audioSource.PlayOneShot(letterClip);
+
+
+            while (audioSource.isPlaying)
+            {
+                yield return new WaitForSeconds(0.001f);
+            }
+            create.PlayTaskAgain();
+        }
     }
 
 

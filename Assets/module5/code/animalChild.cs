@@ -17,7 +17,7 @@ public class animalChild : MonoBehaviour, IDragHandler
         Sprite[] sprs = Resources.LoadAll<Sprite>(path);
         GetComponent<Image>().sprite = sprs[Random.Range(0, sprs.Length)];
         type = sprs[Random.Range(0, sprs.Length)].name;
-        StartCoroutine(waitForAudio());
+        //StartCoroutine(waitForAudio());
     }
     void Start()
     {
@@ -59,10 +59,10 @@ public class animalChild : MonoBehaviour, IDragHandler
         //
         var rect = GetComponent<RectTransform>();
         Vector2 diff = initPos - rect.anchoredPosition;
-        while (diff.magnitude > 0.5f)
+        while (diff.magnitude > 4.0f)
         {
             diff = initPos - rect.anchoredPosition;
-            rect.anchoredPosition += diff.normalized;
+            rect.anchoredPosition += diff.normalized * 5;
             yield return new WaitForSeconds(0.01f);
 
         }

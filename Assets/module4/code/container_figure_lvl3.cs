@@ -25,11 +25,13 @@ public class container_figure_lvl3 : MonoBehaviour
         {
             SaveLoad save = new SaveLoad(levels.figures);
             save.AddP(type);
-            fig.OffDrag(GetComponent<RectTransform>().localPosition);
             fig.GetComponent<Transform>().SetParent(gameObject.transform);
+            fig.OffDrag(GetComponent<RectTransform>().localPosition);
             end.OnPressButton();
+
         }
         
+
     }
 
     public void OnTriggerExit2D(Collider2D other)

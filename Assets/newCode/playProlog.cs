@@ -8,7 +8,8 @@ public class playProlog : MonoBehaviour
     public enum LevelType
     {
         FIGURES,
-        ANIMALS
+        ANIMALS,
+        COLORS
     }
 
     public LevelType type;
@@ -56,8 +57,12 @@ public class playProlog : MonoBehaviour
             AudioClip clip = Resources.Load<AudioClip>(path + "Животные/Уровень 1 пролог/поизучаем животных");
             this.clip = clip;
         }
+        else if (type == LevelType.COLORS)
+        {
+            AudioClip clip = Resources.Load<AudioClip>(path + "Цвета/Уровень 1 пролог/поизучаем цвета");
+            this.clip = clip;
+        }
 
 
-       
     }
 }

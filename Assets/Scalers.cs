@@ -1,11 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-
-
-
+using Random = UnityEngine.Random;
 
 public class Scalers : MonoBehaviour
 {
@@ -19,6 +17,7 @@ public class Scalers : MonoBehaviour
     int changeTargetDir;
     bool changeDir = false;
 
+    public GreetParticle particles;
 
     public void RepeatTask()
     {
@@ -89,9 +88,10 @@ public class Scalers : MonoBehaviour
         }
     }
     AudioClip task;
+    int randNumber;
     void Start()
     {
-        int randNumber = Random.Range(1, 11);
+        randNumber = Random.Range(1, 11);
         innerCounter = randNumber;
         targerText.text = randNumber.ToString();
         Debug.Log($"set text eq: {randNumber}");
@@ -128,12 +128,19 @@ public class Scalers : MonoBehaviour
             task = clip;
         }
     }
-
+    bool was = false;
+    bool pressed = false;
     public void scale()
     {
+        SaveLoad save = new SaveLoad(levels.numbers);
+        if (was || pressed)
+        {
+            return;
+        }
         if (innerCounter == 0)
         {
-            SaveLoad save = new SaveLoad(levels.numbers);
+            was = true;
+            particles.TurnParticleOn();
             GameObject[] found = GameObject.FindGameObjectsWithTag("Respawn");
             foreach (var obj in found)
             {
@@ -144,6 +151,32 @@ public class Scalers : MonoBehaviour
             audioSource.Stop();
             StartCoroutine(Hooks.GetInstance().ToNewLevel("numbersLevel3", audioSource));
         }
+        else
+        {
+            audioSource.Stop();
+            save.AddM(targerText.text);
+            save.AddM(Mathf.Abs(innerCounter).ToString());
+            GameObject[] found = GameObject.FindGameObjectsWithTag("Respawn");
+            foreach (var obj in found)
+            {
+                obj.GetComponent<ScalableItem_lvl3>().ToInit();
+            }
+            audioSource.Stop();
+            Hooks.GetInstance().PlayDis(audioSource);
+            StartCoroutine(Set());
+        }
     }
     
+
+    public IEnumerator Set()
+    {
+        if (!pressed)
+        {
+            pressed = true;
+            yield return new WaitForSeconds(2.0f);
+            animator.Play("eq");
+            animator.SetInteger("dir", randNumber);
+            pressed = false;
+        }
+    }
 }

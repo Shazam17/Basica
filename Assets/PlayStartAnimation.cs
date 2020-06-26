@@ -23,5 +23,6 @@ public class PlayStartAnimation : MonoBehaviour
         transform.SetAsLastSibling();
         GetComponent<Animator>().Play(startAnimation.name);
 
+
     }
 }

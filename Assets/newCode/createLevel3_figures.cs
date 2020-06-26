@@ -10,10 +10,10 @@ public class createLevel3_figures : MonoBehaviour
 
     void Start()
     {
-        Sprite[] loadedSprites = Resources.LoadAll<Sprite>("формы/");
+        Sprite[] loadedSprites = Resources.LoadAll<Sprite>("фигуры_картинки/формы/");
         List<Sprite> sprites = new List<Sprite>(loadedSprites);
         var aS = GetComponent<AudioSource>();
-        for (int i = 0; i < 4;i++)
+        for (int i = 0; i < sprites.Count; i++)
         {
             Sprite selected = sprites[Random.Range(0, sprites.Count)];
             sprites.Remove(selected);

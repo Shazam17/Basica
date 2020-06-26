@@ -45,6 +45,7 @@ public class listController : MonoBehaviour
 
     public void loadStat(string level)
     {
+      
         var fix = Instantiate(text);
         if (level == selected)
         {
@@ -81,7 +82,7 @@ public class listController : MonoBehaviour
             foreach (var list in contentLists)
             {
                 var grid = list.gameObject.GetComponent<GridLayoutGroup>();
-                grid.cellSize = new Vector2(250, 80);
+                grid.cellSize = new Vector2(250, 70);
                 grid.constraintCount = 1;
                 
             }
@@ -119,7 +120,8 @@ public class listController : MonoBehaviour
         }
         Debug.Log(save.letters.Count);
         foreach (var letter in save.letters)
-        {  
+        {
+            
             Sprite let;
             if (level == levels.letters)
             {
@@ -129,7 +131,10 @@ public class listController : MonoBehaviour
             {
                 let = Resources.Load<Sprite>(path + letter.Key);
             }
-
+            if (letter.Key == "0")
+            {
+                continue;
+            }
             var go = Instantiate(img);
             spawned.Add(go);
             go.GetComponent<Image>().sprite = let;

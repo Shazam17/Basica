@@ -9,6 +9,7 @@ public class ButtonEnd_lvl3 : MonoBehaviour
     public Scalers_lvl3 scalers;
     public AudioSource audioSource;
     public ScalableItem_lvl3[] items;
+    
 
     public void End()
     {
@@ -23,6 +24,10 @@ public class ButtonEnd_lvl3 : MonoBehaviour
             save.AddP(scalers.left.loadedWeight.ToString());
             audioSource.Stop();
             StartCoroutine(Hooks.GetInstance().ToNewLevel("numbersLevel3", audioSource));
+        }
+        else
+        {
+       
         }
     
     }

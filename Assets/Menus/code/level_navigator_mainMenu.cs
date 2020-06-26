@@ -8,6 +8,10 @@ public class level_navigator_mainMenu : MonoBehaviour
     public GameObject blurBack;
     public GameObject popUp;
 
+    public void Start()
+    {
+        Input.multiTouchEnabled = false;
+    }
 
     public void ClosePopUp()
     {

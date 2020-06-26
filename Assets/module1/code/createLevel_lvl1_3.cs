@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,25 +21,37 @@ public class createLevel_lvl1_3 : MonoBehaviour
     public char targetLetter;
 
     List<GameObject> letters;
+    public GreetParticle particles;
 
     public void GenerateNewLevel()
     {
+        StartCoroutine(toNewLevel());
+    }
+
+    public IEnumerator toNewLevel()
+    {
+        yield return new WaitForSeconds(0.4f);
         SceneManager.LoadScene("lettersLevel3");
     }
 
     void CreateLevel()
     {
-
+        Input.multiTouchEnabled = false;
         GameObject[] backs = Resources.LoadAll<GameObject>("Фоны Уровень 3/");
-        Debug.Log(backs.Length);
         var plc = Instantiate(backs[Random.Range(0, backs.Length)]);
         plc.transform.SetParent(parent.transform);
         plc.transform.SetAsFirstSibling();
+        plc.transform.localScale = new Vector3(1,1,1);
+        plc.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
         plc.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         
 
-
-        List<RectTransform> places = new List<RectTransform>(plc.GetComponentsInChildren<RectTransform>());
+      
+        List<RectTransform> places = new List<RectTransform>();
+        foreach (Transform child in plc.transform)
+        {
+            places.Add(child.GetComponent<RectTransform>());
+        }
         letters = new List<GameObject>();
         int lvl = PlayerPrefs.GetInt("lvl1_3_letter");
         
@@ -71,7 +84,7 @@ public class createLevel_lvl1_3 : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(txt);
 
 
-        
+        Debug.Log(places.Count);
         for (int i = 0; i < 6; i++)
         {
 
@@ -80,7 +93,8 @@ public class createLevel_lvl1_3 : MonoBehaviour
             tempLet.transform.SetAsLastSibling();
 
             RectTransform place = places[Random.Range(0, places.Count)];
-            tempLet.GetComponent<RectTransform>().anchoredPosition = place.anchoredPosition;
+            tempLet.transform.SetParent(place.transform);
+            tempLet.transform.localPosition = new Vector3(0, 0, 0);
             places.Remove(place);
 
 
@@ -89,6 +103,7 @@ public class createLevel_lvl1_3 : MonoBehaviour
             prs.letter = letterCharTemp;
             prs.audioSource = GetComponent<AudioSource>();
             prs.create = this;
+            prs.particles = particles;
             cLEts.Remove(letterCharTemp);
 
 

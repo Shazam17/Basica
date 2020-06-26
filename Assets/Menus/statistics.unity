@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 14
+    m_Left: 15
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: -40, y: -40}
+  m_Spacing: {x: -30, y: -30}
   m_Constraint: 1
   m_ConstraintCount: 3
 --- !u!114 &13257342
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 14
+    m_Left: 15
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -695,7 +695,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: -40, y: -40}
+  m_Spacing: {x: -30, y: -30}
   m_Constraint: 1
   m_ConstraintCount: 3
 --- !u!114 &199916597
@@ -3762,7 +3762,7 @@ MonoBehaviour:
     1/"
   colorsPath: "\u0446\u0432\u0435\u0442\u0430_\u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438/\u0423\u0440\u043E\u0432\u0435\u043D\u044C
     1/"
-  figuresPath: "\u0444\u043E\u0440\u043C\u044B/"
+  figuresPath: "\u0444\u0438\u0433\u0443\u0440\u044B_\u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0438/\u0444\u0438\u0433\u0443\u0440\u044B/"
   animals: "newDesign/\u041D\u041E\u0412\u042B\u0415 \u0416\u0418\u0412\u041E\u0422\u041D\u042B\u0415
     2 \u0423\u0420\u041E\u0412\u0415\u041D\u042C/\u0440\u043E\u0434\u0438\u0442\u0435\u043B\u0438/"
 --- !u!1 &1601926931
@@ -3829,7 +3829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 14
+    m_Left: 15
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -3837,7 +3837,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: -40, y: -40}
+  m_Spacing: {x: -30, y: -30}
   m_Constraint: 1
   m_ConstraintCount: 3
 --- !u!1 &1624497318

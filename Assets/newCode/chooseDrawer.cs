@@ -12,7 +12,8 @@ public class chooseDrawer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var chsn = paintings[Random.Range(0, paintings.Length)];
+        var index = PlayerPrefs.GetInt("paintType");
+        var chsn = paintings[index];
         var go = Instantiate(chsn, this.transform);
 
     }

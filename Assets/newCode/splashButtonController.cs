@@ -8,7 +8,7 @@ public class splashButtonController : MonoBehaviour
  
     public void PressOnLeftButton()
     {
-        Application.OpenURL("https://play.google.com/store/apps/details?id=com.ParaLion.BasicaOffworld&hl=ru");
+        Application.OpenURL("https://docs.google.com/document/d/11lKnKN9OcwwFZGskKLIdOyLGT85NbDkqsNSfOS7d20M/edit");
     }
 
     public void PressOnRightButton()

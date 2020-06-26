@@ -17,7 +17,7 @@ public class generateFigures2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Sprite[] arr = Resources.LoadAll<Sprite>("фигуры_картинки/Уровень 2/формы");
+        Sprite[] arr = Resources.LoadAll<Sprite>("фигуры_картинки/фигуры/");
 
         Sprite[] items = Resources.LoadAll<Sprite>("фигуры_картинки/Уровень 2/предметы");
 

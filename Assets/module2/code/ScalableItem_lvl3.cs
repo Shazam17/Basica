@@ -14,7 +14,7 @@ public class ScalableItem_lvl3 : MonoBehaviour, IDragHandler
     void Start()
     {
         initPlace = GetComponent<RectTransform>().anchoredPosition;
-        StartCoroutine(waitForAudio());
+      
     }
     public IEnumerator waitForAudio()
     {
@@ -24,7 +24,7 @@ public class ScalableItem_lvl3 : MonoBehaviour, IDragHandler
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (!lck && eventData.position.x < 1600f)
+        if (!lck)
         {
             transform.position = eventData.position;
 
@@ -41,10 +41,10 @@ public class ScalableItem_lvl3 : MonoBehaviour, IDragHandler
         //
         var rect = GetComponent<RectTransform>();
         Vector2 diff = initPlace - rect.anchoredPosition;
-        while (diff.magnitude > 0.5f)
+        while (diff.magnitude > 6f)
         {
             diff = initPlace - rect.anchoredPosition;
-            rect.anchoredPosition += diff.normalized;
+            rect.anchoredPosition += diff.normalized * 4;
             yield return new WaitForSeconds(0.01f);
 
         }

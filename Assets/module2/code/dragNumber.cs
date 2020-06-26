@@ -13,7 +13,7 @@ public class dragNumber : MonoBehaviour, IDragHandler
     void Start()
     {
         initPlace = GetComponent<RectTransform>().anchoredPosition;
-        StartCoroutine(lockProlog());
+        //StartCoroutine(lockProlog());
     }
 
     bool prlg = false;

@@ -9,8 +9,9 @@ public class endLevel_lvl2 : MonoBehaviour
     public DragColor_lvl2[] colors;
     public AudioSource audioSource;
 
- 
-  
+    public GreetParticle particles;
+
+
     public void OnButtonPress()
     {
         SaveLoad save = new SaveLoad(levels.colors);
@@ -25,7 +26,8 @@ public class endLevel_lvl2 : MonoBehaviour
 
         if (flag)
         {
-          foreach(var color in colors)
+            particles.TurnParticleOn();
+            foreach (var color in colors)
             {
                 color.lockColor();
                 save.AddP(color.color);

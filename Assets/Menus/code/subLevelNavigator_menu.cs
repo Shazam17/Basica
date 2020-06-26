@@ -11,6 +11,7 @@ public class subLevelNavigator_menu : MonoBehaviour
     public Image backRight;
     public Image mainImage;
     public GameObject menuObject3;
+    public GameObject mainPanel;
 
     ModuleStrategy subMenuStrategy;
 
@@ -40,6 +41,8 @@ public class subLevelNavigator_menu : MonoBehaviour
                 break;
             case "животные":
                 menuObject3.SetActive(false);
+                mainPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+                mainPanel.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
                 subMenuStrategy = new AnimalsStrategy();
                 break;
 

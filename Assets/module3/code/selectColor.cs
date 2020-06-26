@@ -25,5 +25,6 @@ public class selectColor : MonoBehaviour, IPointerClickHandler
         picker.lastSelect = this;
         GetComponent<Image>().color = picker.selectColor;
         picker.selectedColor = color;
+        picker.colorImage.color = color;
     }
 }

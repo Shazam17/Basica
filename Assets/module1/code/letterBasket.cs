@@ -21,6 +21,7 @@ public class letterBasket : MonoBehaviour
     private SaveLoad save;
     private List<char> cLEts;
     public Text targetText;
+    public GreetParticle particles;
     public static char GetRandomLetter()
     {
         int letterIndex = Random.Range(0, 31);
@@ -37,22 +38,33 @@ public class letterBasket : MonoBehaviour
 
     public void PlayIntro()
     {
+        StartCoroutine(playIntroDelayed());
+    }
+
+    public IEnumerator playIntroDelayed()
+    {
+        yield return new WaitForSeconds(0.4f);
         if (!audioSource.isPlaying)
         {
             handAnimation.PlayAnimation();
             audioSource.PlayOneShot(intro);
-            foreach(var let in letters)
+            foreach (var let in letters)
             {
                 let.StartCoroutine(let.startLock());
             }
-        }  
+        }
     }
-    int lvl;
+    
+    public int lvl;
     public void RightButton()
     {
         if (lvl == 31)
         {
             PlayerPrefs.SetInt("lvl1_2_letter", 0);
+        }
+        else if (lvl == 25)
+        {
+            PlayerPrefs.SetInt("lvl1_2_letter", 29);
         }
         else
         {
@@ -67,6 +79,10 @@ public class letterBasket : MonoBehaviour
         if (lvl == 0)
         {
             PlayerPrefs.SetInt("lvl1_2_letter", 31);
+        }
+        else if (lvl == 29)
+        {
+            PlayerPrefs.SetInt("lvl1_2_letter", 25);
         }
         else
         {
@@ -86,13 +102,10 @@ public class letterBasket : MonoBehaviour
     public void Start()
     {
 
-        lvl = PlayerPrefs.GetInt("lvl1_2_letter");
-       
-        if (lvl == 31)
-        {
-            PlayerPrefs.SetInt("lvl1_2_letter", 1);
-        }
 
+        lvl = PlayerPrefs.GetInt("lvl1_2_letter");
+     
+   
         
 
         cLEts = new List<char>();
@@ -117,7 +130,7 @@ public class letterBasket : MonoBehaviour
         List<dragLetter> letts = new List<dragLetter>(letters);
         var chsn = letts[Random.Range(0, letts.Count)];
         letts.Remove(chsn);
-        targetText.text = letter.ToString();
+        targetText.text = letter.ToString().ToUpper();
         //Sprite textureTemp = Resources.Load<Sprite>("буквы_картинки/корзины/" + letterChar.ToString().ToUpper());
         //GetComponent<Image>().sprite = textureTemp;
         chsn.setLetter(letter);
@@ -130,21 +143,39 @@ public class letterBasket : MonoBehaviour
         }
 
     }
+
+    bool falseTrigger = false;
     public AnimationClip fallInBoxClip;
     bool endLevel = false;
     void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (letter == other.GetComponent<dragLetter>().letter)
+        if (letter == other.GetComponent<dragLetter>().letter && !falseTrigger)
         {
             //Perform animation
+            particles.TurnParticleOn();
             GameObject targetImage = other.gameObject.transform.GetChild(0).gameObject;
             targetImage.transform.SetParent(gameObject.transform);
             targetImage.transform.SetAsFirstSibling();
             targetImage.GetComponent<Animator>().enabled = true;
             targetImage.GetComponent<Animator>().Play(fallInBoxClip.name);
 
-            PlayerPrefs.SetInt("lvl1_2_letter", lvl + 1);
+         
+            
+
+            if (lvl == 31)
+            {
+                PlayerPrefs.SetInt("lvl1_2_letter", 0);
+            }
+            else if (lvl == 25)
+            {
+                PlayerPrefs.SetInt("lvl1_2_letter", 29);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("lvl1_2_letter", lvl + 1);
+            }
+
             save.AddP(letter.ToString());
             AudioClip clip = OpenGteets.GetGreet();
             audioSource = GetComponent<AudioSource>();
@@ -160,6 +191,7 @@ public class letterBasket : MonoBehaviour
         }
         else
         {
+            falseTrigger = true;
             save.AddM(letter.ToString());
             save.AddM(other.GetComponent<dragLetter>().letter.ToString());
             AudioClip clip = OpenGteets.GetDis();
@@ -167,10 +199,9 @@ public class letterBasket : MonoBehaviour
 
             Handheld.Vibrate();
             GetComponent<Animator>().Play("letters2BasketFalse");
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(clip);
-            }
+            audioSource.Stop();
+            audioSource.PlayOneShot(clip);
+            
             other.GetComponent<dragLetter>().GoBack();
 
             foreach (var obj in letters)
@@ -181,6 +212,11 @@ public class letterBasket : MonoBehaviour
         }
 
 
+    }
+
+    public void setFalseTrigger()
+    {
+        falseTrigger = false;
     }
 
 

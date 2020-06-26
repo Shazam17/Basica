@@ -12,6 +12,8 @@ public class testColliderBox : MonoBehaviour
     public endLevel_lvl2 end;
     public bool matched = false;
     public Animator top;
+
+  
     void OnTriggerEnter2D(Collider2D other)
     {
         SaveLoad save = new SaveLoad(levels.colors);
@@ -43,14 +45,6 @@ public class testColliderBox : MonoBehaviour
         end.OnButtonPress();
     }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.GetComponent<DragColor_lvl2>().color.Equals(targetColor))
-        {
-            matched = false;
-        }
-    }
-
     bool lck = false;
     public void ToInit()
     {
@@ -72,8 +66,6 @@ public class testColliderBox : MonoBehaviour
     private IEnumerator toInitPlace()
     {
         lck = true;
-
-        //
         var rect = GetComponent<RectTransform>();
         Vector2 diff = initPos - rect.anchoredPosition;
         while (diff.magnitude > 0.5f)

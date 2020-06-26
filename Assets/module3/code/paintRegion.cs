@@ -15,7 +15,7 @@ public class paintRegion : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        colorPicker picker = GameObject.Find("colorPicker").GetComponent<colorPicker>();
+        colorPicker picker = GameObject.Find("color").GetComponent<colorPicker>();
         img.color = picker.selectedColor;
     }
 

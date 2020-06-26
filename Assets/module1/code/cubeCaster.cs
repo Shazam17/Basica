@@ -216,6 +216,7 @@ public class cubeCaster : MonoBehaviour
                 left += marginLeft;
             }
         }
+        cubeParent.transform.localPosition = new Vector3(0f,8f,0f);
         foreach (var cube in cubes)
         {
             cube.GetComponent<cubeScript>().Init(audioSource);

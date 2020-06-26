@@ -781,6 +781,7 @@ MonoBehaviour:
   backRight: {fileID: 1577507763}
   mainImage: {fileID: 27866262}
   menuObject3: {fileID: 2142626264}
+  mainPanel: {fileID: 1570256983}
 --- !u!1 &1161795174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,7 +1381,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 73}
+  m_AnchoredPosition: {x: 0, y: 70}
   m_SizeDelta: {x: 100, y: -8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1570256985
@@ -1403,7 +1404,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 160, y: 100}
+  m_CellSize: {x: 160, y: 90}
   m_Spacing: {x: 0, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2

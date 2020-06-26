@@ -19,7 +19,7 @@ public class dragFigure3 : MonoBehaviour, IDragHandler, IPointerClickHandler
     {
         //audioSource = GetComponent<AudioSource>();
         initPlace = GetComponent<RectTransform>().anchoredPosition;
-        StartCoroutine(waitForAudio());
+        //StartCoroutine(waitForAudio());
     }
 
     public IEnumerator waitForAudio()
@@ -47,9 +47,15 @@ public class dragFigure3 : MonoBehaviour, IDragHandler, IPointerClickHandler
     public bool active = false;
     public void OffDrag(Vector2 pos)
     {
-        GetComponent<RectTransform>().localPosition = pos;
+        GetComponent<RectTransform>().localPosition = new Vector3(0,0);
         enbld = false;
         active = true;
+    }
+
+
+    public void LockAnimation()
+    {
+        GetComponent<Animator>().enabled = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -94,11 +100,12 @@ public class dragFigure3 : MonoBehaviour, IDragHandler, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("click");
         if (enbld && clicked)
         {
+            Debug.Log("click");
             if (!outSide)
             {
+                Handheld.Vibrate();
                 SaveLoad save = new SaveLoad(levels.figures);
                 save.AddM(type);
                 save.AddM(tType);

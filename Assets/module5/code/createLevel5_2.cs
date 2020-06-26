@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class createLevel5_2 : MonoBehaviour
 {
     public animalContainer[] targetImages;
     public animalChild[] children;
+    public GreetParticle particles;
 
-    AudioSource audioSource;
-    AudioClip clip;
+    private bool lck = false;
+    private AudioSource audioSource;
+    private AudioClip clip;
 
 
     public void PlayProlog()
@@ -23,6 +26,12 @@ public class createLevel5_2 : MonoBehaviour
                 child.StartCoroutine(child.waitForAudio());
             }
         }
+    }
+
+
+    public void ToNewLevel()
+    {
+        SceneManager.LoadScene("animalsLevel2");
     }
 
     void Start()
@@ -52,7 +61,6 @@ public class createLevel5_2 : MonoBehaviour
 
 
 
-    bool lck = false;
     void Update()
     {
         bool chcd = false;
@@ -67,6 +75,7 @@ public class createLevel5_2 : MonoBehaviour
 
         if (!chcd)
         {
+            particles.TurnParticleOn();
             lck = true;
             SaveLoad save = new SaveLoad(levels.animals);
             audioSource.Stop();

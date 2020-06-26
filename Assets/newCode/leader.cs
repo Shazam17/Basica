@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class leader : MonoBehaviour
 {
 
-    public Sprite maleLead;
+    public GameObject fem;
+    public GameObject mal;
 
     // Start is called before the first frame update
     void Start()
@@ -14,7 +15,13 @@ public class leader : MonoBehaviour
         var v = Hooks.GetVoicePath();
         if (v.Equals("мужской/"))
         {
-            GetComponent<Image>().sprite = maleLead;
+            var go = Instantiate(mal, transform);
+            go.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+        }
+        else
+        {
+            var go = Instantiate(fem, transform);
+            go.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         }
         StartCoroutine(disaper());
     }
@@ -23,11 +30,12 @@ public class leader : MonoBehaviour
     public IEnumerator disaper()
     {
         yield return new WaitForSeconds(4.0f);
+        var rt = GetComponent<Transform>();
+        Debug.Log(rt.position.x);
 
-        var rt = GetComponent<RectTransform>();
-        while(rt.anchoredPosition.x < 650)
+        while (rt.position.x < 650)
         {
-            rt.anchoredPosition += new Vector2(4f, 0);
+            rt.position += new Vector3(4f, 0,0);
             yield return new WaitForSeconds(0.01f);
         }
     }

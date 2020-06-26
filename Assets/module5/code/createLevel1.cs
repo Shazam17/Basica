@@ -12,10 +12,16 @@ public class createLevel1 : MonoBehaviour
 
     public Button firstButton;
     public List<GameObject> spawned;
+    public selectAnimalGroup selector;
+
     List<List<Sprite>> sprites;
     string path;
+
+    Vector2 initPlace;
+
     void Start()
     {
+        initPlace = transform.GetComponent<RectTransform>().anchoredPosition;
         sprites = new List<List<Sprite>>();
         Sprite[] images1 = Resources.LoadAll<Sprite>("животные_картинки/Уровень 1/домашние/");
         Sprite[] images2 = Resources.LoadAll<Sprite>("животные_картинки/Уровень 1/лесные/");
@@ -34,13 +40,16 @@ public class createLevel1 : MonoBehaviour
     }
 
     int selected = -1;
+
     public void LoadAnimals(int val)
     {
+        selector.Select(val);
+        GetComponent<RectTransform>().anchoredPosition = initPlace;
         if(selected == val)
         {
             return;
         }
-        selected = val;
+        
         foreach(var spwnd in spawned)
         {
             Destroy(spwnd);
@@ -53,7 +62,10 @@ public class createLevel1 : MonoBehaviour
             go.GetComponent<Image>().sprite = image;
             spawned.Add(go);
             animalBatch batch = go.GetComponent<animalBatch>();
-
+            if(selected == -1)
+            {
+                StartCoroutine(batch.lockProlog());
+            }
             AudioClip ch = Resources.Load<AudioClip>(path + "Животные/Уровень 1/" + image.name + "1");
             AudioClip animalSound = Resources.Load<AudioClip>(path + "Животные/Уровень 2 Звуки/" + image.name);
 
@@ -62,6 +74,7 @@ public class createLevel1 : MonoBehaviour
             batch.audioSource = audioSource;
 
         }
+        selected = val;
     }
 
 

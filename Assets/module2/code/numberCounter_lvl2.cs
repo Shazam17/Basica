@@ -18,10 +18,14 @@ public class numberCounter_lvl2 : MonoBehaviour
     List<dragNumber> numbers;
 
     bool lck = false;
+    public GreetParticle particles;
+    public PlayStartAnimation playStart;
+
     public void PlayIntro()
     {
         if (!audioSource.isPlaying)
         {
+            playStart.PlayAnimation();
             audioSource.PlayOneShot(audioSource.clip);
             StartCoroutine(lockEndButton());
             foreach (var n in numbers)
@@ -71,18 +75,18 @@ public class numberCounter_lvl2 : MonoBehaviour
 
         int n = 10;
 
-        Vector3 move = new Vector3(100, 0,0);
+        Vector3 move = new Vector3(150, 0,0);
         for (int i = 0; i < n && i < 5; i++)
         {
             var go = Instantiate(spawningObject, startSpawnPoint);
             go.transform.SetParent(parent);
             go.GetComponent<dragNumber>().LoadWithImage(type);
-            startSpawnPoint.localPosition += move ;
+            startSpawnPoint.localPosition += move;
             numbers.Add(go.GetComponent<dragNumber>());
         }
 
-        startSpawnPoint.localPosition += new Vector3(0, -80, 0);
-        startSpawnPoint.localPosition += new Vector3(-500,0 ,0);
+        startSpawnPoint.localPosition += new Vector3(0, -120, 0);
+        startSpawnPoint.localPosition += new Vector3(-750,0 ,0);
         for (int i = 5; i < n; i++)
         {
             var go = Instantiate(spawningObject, startSpawnPoint);
@@ -98,8 +102,13 @@ public class numberCounter_lvl2 : MonoBehaviour
     {
         
         SaveLoad save = new SaveLoad(levels.numbers);
+        if (audioSource.isPlaying)
+        {
+            return;
+        }
         if (counter == targerCount )
         {
+            particles.TurnParticleOn();
             foreach (var n in numbers)
             {
                 n.lck = true;
@@ -114,6 +123,7 @@ public class numberCounter_lvl2 : MonoBehaviour
         else
         {
             Debug.Log("ZERO");
+            audioSource.Stop();
             Hooks.GetInstance().PlayDis(audioSource);
             if (counter != 0)
             {

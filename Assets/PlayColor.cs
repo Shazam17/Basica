@@ -95,7 +95,7 @@ public class PlayColor : MonoBehaviour
     {
         lck = true;
     }
-
+    public GameObject button;
     public void Unlock()
     {
         wasInput = false;
@@ -104,6 +104,8 @@ public class PlayColor : MonoBehaviour
         {
             PlayerPrefs.SetInt("canTouch", 1);
             transform.parent.gameObject.SetActive(false);
+            button.SetActive(true);
+            button.GetComponent<playProlog>().PlayProlog();
             return;
         }
         lastImage = colors[0];
@@ -115,8 +117,22 @@ public class PlayColor : MonoBehaviour
 
         img.sprite = lastImage;
         animator.Play(fadeIn.name);
+
+
+        //StartCoroutine(waitIfUserNotRespond());
     }
 
+
+   // public bool touched = false;
+    //public IEnumerator waitIfUserNotRespond()
+    //{
+
+    //    yield return new WaitForSeconds()
+     //   if (touched)
+    //    {
+
+   //     }
+  //  }
 
     public void PlayAudio()
     {

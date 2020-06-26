@@ -8,7 +8,7 @@ public class setRepeatTaskButton : MonoBehaviour
     void Start()
     {
         var rt = GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(-50, 60);
+        rt.anchoredPosition = new Vector2(-100, 100);
     }
 
 }
